@@ -6,7 +6,27 @@
   <title>Oracle of Baitong — พอร์ตโฟลิโอของ ณัฐทิชา ศรีสุข</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="theme-purple">
+
+  <!-- HUD STATUS BAR -->
+  <div class="hud-status-bar">
+    <div class="hud-left">
+      <span class="status-indicator"></span>
+      <span class="status-text">SYSTEM: ONLINE</span>
+      <span class="hud-sep">|</span>
+      <span class="status-mode">THEME: </span>
+      <select id="theme-selector" class="hud-select">
+        <option value="theme-purple">Purple Neon</option>
+        <option value="theme-cyan">Cyber Cyan</option>
+        <option value="theme-green">Emerald Hack</option>
+      </select>
+    </div>
+    <div class="hud-right">
+      <span class="hud-time" id="realtime-clock">00:00:00 AM</span>
+      <span class="hud-sep">|</span>
+      <span>IP: 192.168.43.30</span>
+    </div>
+  </div>
 
   <div class="container">
     
@@ -14,7 +34,7 @@
     <header>
       <div class="header-top">
         <div class="title-area">
-          <h1>Oracle of Baitong</h1>
+          <h1 class="glitch-text" data-text="Oracle of Baitong">Oracle of Baitong</h1>
           <p>วิศวกรรมคอมพิวเตอร์ & วิศวกรรมซอฟต์แวร์ · มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
         </div>
         <div class="meta-info">
@@ -40,6 +60,13 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
           ประวัติส่วนตัว (Profile)
         </h2>
+        
+        <!-- Profile Picture with Scanner Effect -->
+        <div class="profile-pic-container">
+          <img class="profile-pic" src="images/img_3_2.jpeg" alt="Baitong Profile" onerror="this.src='https://placehold.co/150x150/1e1e2e/cdd6f4?text=Baitong'">
+          <div class="scan-line"></div>
+        </div>
+
         <div class="profile-info">
           <div class="info-item">
             <span class="info-label">ชื่อ - นามสกุล</span>
@@ -190,7 +217,11 @@
       <!-- Project 1 -->
       <article class="panel project-card">
         <div>
-          <div class="project-tags">
+          <!-- Project Showcase Image -->
+          <div class="project-img-container">
+            <img class="project-img" src="images/img_5_5.jpeg" alt="AI Smart Bin Screenshot" onerror="this.src='https://placehold.co/400x200/121218/a1a1aa?text=AI+Smart+Bin'">
+          </div>
+          <div class="project-tags" style="margin-top: 1rem;">
             <span class="tag">YOLOv11</span>
             <span class="tag">Roboflow</span>
             <span class="tag">Python</span>
@@ -209,7 +240,11 @@
       <!-- Project 2 -->
       <article class="panel project-card">
         <div>
-          <div class="project-tags">
+          <!-- Project Showcase Image -->
+          <div class="project-img-container">
+            <img class="project-img" src="images/img_5_4.jpeg" alt="Android App Chemistry Screenshot" onerror="this.src='https://placehold.co/400x200/121218/a1a1aa?text=Android+Chemistry+App'">
+          </div>
+          <div class="project-tags" style="margin-top: 1rem;">
             <span class="tag">Android Studio</span>
             <span class="tag">Java</span>
             <span class="tag">Mobile App</span>
@@ -238,6 +273,10 @@
         <div class="activity-details">
           <h3>PSRU Cyber Hackathon #3</h3>
           <p>โครงการอบรมเชิงปฏิบัติการและแข่งขันทักษะด้านความปลอดภัยทางไซเบอร์ ณ หอประชุมศรีวชิรโชติ มหาวิทยาลัยราชภัฏพิบูลสงคราม ร่วมกับ สกมช. (NCSA), กฟผ. และบริษัทเทคโนโลยีชั้นนำกว่า 16 แห่ง</p>
+          <div class="activity-gallery">
+            <img src="images/img_6_3.jpeg" alt="PSRU Cyber Hackathon" class="activity-thumb" onerror="this.style.display='none'">
+            <img src="images/img_6_4.jpeg" alt="PSRU Cyber Hackathon Group" class="activity-thumb" onerror="this.style.display='none'">
+          </div>
         </div>
       </div>
 
@@ -246,6 +285,10 @@
         <div class="activity-details">
           <h3>AI Agent Coding Camp</h3>
           <p>โครงการยกระดับทักษะแห่งอนาคต โดย อาจารย์ ดร.ณัฐ วีระวรรณ (ผู้ก่อตั้ง Chiang Mai Maker Club) ณ คณะเทคโนโลยีอุตสาหกรรม มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
+          <div class="activity-gallery">
+            <img src="images/img_7_3.jpeg" alt="AI Agent Coding Camp" class="activity-thumb" onerror="this.style.display='none'">
+            <img src="images/img_7_5.jpeg" alt="AI Agent Coding Camp Lecture" class="activity-thumb" onerror="this.style.display='none'">
+          </div>
         </div>
       </div>
 
@@ -254,6 +297,9 @@
         <div class="activity-details">
           <h3>CyberNet Pro</h3>
           <p>โครงการเพื่อมุ่งเน้นพัฒนาศักยภาพ อัปสกิลความรู้ด้านระบบเครือข่าย (Network) และความปลอดภัยทางไซเบอร์ (Cybersecurity) ณ ห้องปฏิบัติการคอมพิวเตอร์ คณะเทคโนโลยีอุตสาหกรรม</p>
+          <div class="activity-gallery">
+            <img src="images/img_7_4.jpeg" alt="CyberNet Pro" class="activity-thumb" onerror="this.style.display='none'">
+          </div>
         </div>
       </div>
 
@@ -262,6 +308,9 @@
         <div class="activity-details">
           <h3>อบรมเปิดประตูสู่โลกแห่ง IoT และระบบอัตโนมัติ</h3>
           <p>พัฒนาทักษะด้านฮาร์ดแวร์และการเชื่อมต่อระบบอัตโนมัติ ณ สถาบันเทคโนโลยีดิจิทัล มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
+          <div class="activity-gallery">
+            <img src="images/img_7_6.jpeg" alt="IoT Training" class="activity-thumb" onerror="this.style.display='none'">
+          </div>
         </div>
       </div>
 
@@ -286,6 +335,9 @@
         <div class="activity-details">
           <h3>ออกแบบและติดตั้งระบบ WI-FI</h3>
           <p>โครงการอบรมภาคปฏิบัติการออกแบบและติดตั้งระบบเครือข่ายไร้สาย Wi-Fi ณ ห้องปฏิบัติการคอมพิวเตอร์ IDT มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
+          <div class="activity-gallery">
+            <img src="images/img_6_5.jpeg" alt="WI-FI Training" class="activity-thumb" onerror="this.style.display='none'">
+          </div>
         </div>
       </div>
 
@@ -294,6 +346,9 @@
         <div class="activity-details">
           <h3>เตรียมความพร้อมช่างซ่อมไมโครคอมพิวเตอร์</h3>
           <p>โครงการเตรียมความพร้อมการทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ สาขาช่างซ่อมไมโครคอมพิวเตอร์ ระดับ 1</p>
+          <div class="activity-gallery">
+            <img src="images/img_6_6.jpeg" alt="Microcomputer Repair" class="activity-thumb" onerror="this.style.display='none'">
+          </div>
         </div>
       </div>
 
@@ -356,6 +411,29 @@
 
     </div>
 
+    <!-- TERMINAL INTERACTIVE SHIELD -->
+    <h2 class="section-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+      BAITONG CONSOLE v1.0
+    </h2>
+    <div class="panel terminal-panel">
+      <div class="terminal-header">
+        <div class="terminal-dot red"></div>
+        <div class="terminal-dot yellow"></div>
+        <div class="terminal-dot green"></div>
+        <span class="terminal-title">guest@baitong-oracle: ~</span>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <p class="term-line output">ยินดีต้อนรับสู่คอนโซลจำลองของใบตอง!</p>
+        <p class="term-line output">พิมพ์ <span class="term-highlight">help</span> เพื่อดูคำสั่งทั้งหมดที่สามารถใช้งานได้</p>
+        <br>
+        <div class="term-input-line">
+          <span class="term-prompt">guest@baitong-oracle:~$</span>
+          <input type="text" id="terminal-input" autocomplete="off" autofocus>
+        </div>
+      </div>
+    </div>
+
     <!-- PHILOSOPHY / MIDNIGHT MUSE STYLE QUOTES -->
     <h2 class="section-title">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -385,6 +463,13 @@
       <p>© 2026 <a href="https://github.com/Nadticha30" target="_blank">Nadticha Srisuk</a>. Built with elegance and quiet focus. PSRU Computer Engineering.</p>
     </footer>
 
+  </div>
+
+  <!-- LIGHTBOX MODAL FOR GALLERY IMAGES -->
+  <div id="lightbox-modal" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+    <div id="lightbox-caption"></div>
   </div>
 
   <script src="script.js"></script>
