@@ -1,477 +1,1648 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oracle of Baitong — พอร์ตโฟลิโอของ ณัฐทิชา ศรีสุข</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Midnight Muse — พอร์ตโฟลิโอของ ณัฐทิชา ศรีสุข</title>
+    <meta name="description"
+        content="Midnight Muse — พอร์ตโฟลิโอส่วนตัวและผลงานของ ใบตอง ณัฐทิชา ศรีสุข วิศวกรรมคอมพิวเตอร์ PSRU">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --bg2: #161b22;
+            --primary: #c084fc;
+            --secondary: #fbbf24;
+            --accent: #818cf8;
+            --text: #f0f6fc;
+            --muted: #8b949e;
+            --glass: rgba(22, 27, 34, 0.75);
+            --border: rgba(192, 132, 252, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Noto Sans Thai', 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        #hero-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 720px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 3rem;
+            box-shadow: 0 0 50px rgba(192, 132, 252, 0.15);
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-content.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 1s, transform 1s;
+        }
+
+        /* Profile Picture with Scan Effect */
+        .hero-avatar-container {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 1.5rem auto;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(192, 132, 252, 0.4);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .hero-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-8px) rotate(1deg);
+            }
+            75% {
+                transform: translateY(-4px) rotate(-1deg);
+            }
+        }
+
+        .hero-name {
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 900;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            color: var(--muted);
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-quote {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(0.9rem, 2vw, 1.15rem);
+            color: var(--secondary);
+            padding: 0.75rem 1.5rem;
+            background: rgba(251, 191, 36, 0.06);
+            border-left: 3px solid var(--secondary);
+            border-radius: 0 12px 12px 0;
+            display: inline-block;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-human {
+            font-size: 0.85rem;
+            color: var(--muted);
+            letter-spacing: 1px;
+            line-height: 1.6;
+        }
+
+        .hero-human a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .hero-human a:hover {
+            color: var(--secondary);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            font-size: 0.7rem;
+            color: var(--muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(8px);
+            }
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--primary);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 900;
+            margin-bottom: 3rem;
+            line-height: 1.2;
+        }
+
+        .section-title span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ===== STATEMENT OF PURPOSE ===== */
+        .sop-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .sop-text {
+            font-size: 1.05rem;
+            color: var(--text);
+            text-indent: 2.5rem;
+            text-align: justify;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .sop-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== STATS ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 40px rgba(192, 132, 252, 0.15);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(192, 132, 252, 0.05), transparent 30%);
+            animation: spin 8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .stat-num {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary);
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 30px rgba(192, 132, 252, 0.4);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+            margin-top: 0.5rem;
+        }
+
+        /* ===== PROFILE INFO ===== */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.8rem 0;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .info-val {
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* ===== SKILLS ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(192, 132, 252, 0.1);
+        }
+
+        .skill-cat {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 1.2rem;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .skill-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .skill-desc {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* ===== PROJECTS ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(192, 132, 252, 0.15), 0 0 0 1px var(--primary);
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .project-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .project-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 170px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: #000;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: transform 0.4s;
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.04);
+            opacity: 0.95;
+        }
+
+        .project-icon {
+            font-size: 2.2rem;
+        }
+
+        .project-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--primary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            background: rgba(192, 132, 252, 0.1);
+            border-radius: 100px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .project-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .project-role-badge {
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid var(--secondary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 0 8px 8px 0;
+            color: var(--text);
+            margin-top: 0.5rem;
+        }
+
+        .project-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--secondary);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: auto;
+        }
+
+        /* ===== ACTIVITIES ===== */
+        .activity-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            transition: all 0.3s;
+        }
+
+        .activity-card:hover {
+            border-color: rgba(192, 132, 252, 0.3);
+            box-shadow: 0 10px 30px rgba(192, 132, 252, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .activity-card {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 2rem;
+            }
+        }
+
+        .activity-date {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .activity-details h3 {
+            font-size: 1.15rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-details p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .activity-gallery {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .activity-thumb {
+            width: 110px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .activity-thumb:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* ===== CERTIFICATES ===== */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 180px;
+            transition: all 0.3s;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(192, 132, 252, 0.08);
+        }
+
+        .cert-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--text);
+        }
+
+        .cert-bottom {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 0.75rem;
+        }
+
+        /* ===== PHILOSOPHY ===== */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .philosophy-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .philosophy-card .phi-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba(192, 132, 252, 0.1);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+        }
+
+        .philosophy-card h3 {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+        }
+
+        .philosophy-card p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* ===== SIBLINGS / COLLABORATIVE NETWORK ===== */
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .family-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+
+        .family-card:hover {
+            border-color: var(--border);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(192, 132, 252, 0.1);
+        }
+
+        .family-emoji {
+            font-size: 1.8rem;
+        }
+
+        .family-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .family-url {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--muted);
+        }
+
+        /* ===== LIGHTBOX MODAL ===== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            padding-top: 5rem;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            overflow: auto;
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 85%;
+            max-height: 75vh;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+            animation: zoom 0.3s;
+        }
+
+        @keyframes zoom {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2.5rem;
+            color: var(--text);
+            font-size: 2.5rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--primary);
+        }
+
+        #lightbox-caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: var(--muted);
+            padding: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 16px 48px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--bg);
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px rgba(192, 132, 252, 0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px rgba(192, 132, 252, 0.5);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* ===== REVEAL ANIMATION ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 100svh;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            section {
+                padding: 3rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scan line */
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0.06;
+            z-index: 9999;
+            pointer-events: none;
+            animation: scanDown 10s linear infinite;
+        }
+
+        @keyframes scanDown {
+            0% { top: -2%; }
+            100% { top: 102%; }
+        }
+
+        /* Intro Sequence */
+        .intro-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .intro-text {
+            border-right: 2px solid var(--primary);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .system-status {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--primary);
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 12px;
+            border-left: 2px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            pointer-events: none;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 10px var(--primary);
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
 </head>
-<body class="theme-purple">
 
-  <!-- HUD STATUS BAR -->
-  <div class="hud-status-bar">
-    <div class="hud-left">
-      <span class="status-indicator"></span>
-      <span class="status-text">SYSTEM: ONLINE</span>
-      <span class="hud-sep">|</span>
-      <span class="status-mode">THEME: </span>
-      <select id="theme-selector" class="hud-select">
-        <option value="theme-purple">Purple Neon</option>
-        <option value="theme-cyan">Cyber Cyan</option>
-        <option value="theme-green">Emerald Hack</option>
-      </select>
+<body>
+    <!-- INTRO SEQUENCE OVERLAY -->
+    <div class="intro-overlay" id="intro">
+        <div class="intro-text" id="intro-text"></div>
+        <div style="font-size: 0.7rem; opacity: 0.5;">[ INITIALIZING MIDNIGHT_MUSE_CORE ]</div>
     </div>
-    <div class="hud-right">
-      <span class="hud-time" id="realtime-clock">00:00:00 AM</span>
-      <span class="hud-sep">|</span>
-      <span>IP: 192.168.43.30</span>
-    </div>
-  </div>
 
-  <div class="container">
+    <!-- HUD SYSTEM STATUS -->
+    <div class="system-status">
+        <div><span class="status-dot"></span>CORE: OPTIMIZED</div>
+        <div><span class="status-dot" style="animation-delay: 0.5s"></span>SYNC: ACTIVE</div>
+        <div id="status-time">00:00:00</div>
+    </div>
     
-    <!-- HEADER -->
-    <header>
-      <div class="header-top">
-        <div class="title-area">
-          <h1 class="glitch-text" data-text="Oracle of Baitong">Oracle of Baitong</h1>
-          <p>วิศวกรรมคอมพิวเตอร์ & วิศวกรรมซอฟต์แวร์ · มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
-        </div>
-        <div class="meta-info">
-          <span>
-            <svg style="width:14px;height:14px;vertical-align:middle;margin-right:4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-            Github: <a href="https://github.com/Nadticha30" target="_blank">@Nadticha30</a>
-          </span>
-          <span>•</span>
-          <span>
-            <svg style="width:14px;height:14px;vertical-align:middle;margin-right:4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            พิษณุโลก, ประเทศไทย
-          </span>
-        </div>
-      </div>
-    </header>
+    <!-- BACKGROUND SCAN LINE -->
+    <div class="scan-line"></div>
 
-    <!-- GRID LAYOUT (Profile & Statement of Purpose) -->
-    <div class="grid-layout">
-      
-      <!-- Left Panel: Profile -->
-      <section class="panel">
-        <h2 class="panel-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-          ประวัติส่วนตัว (Profile)
-        </h2>
-        
-        <!-- Profile Picture with Scanner Effect -->
-        <div class="profile-pic-container">
-          <img class="profile-pic" src="images/img_3_2.jpeg" alt="Baitong Profile" onerror="this.src='https://placehold.co/150x150/1e1e2e/cdd6f4?text=Baitong'">
-          <div class="scan-line"></div>
-        </div>
-
-        <div class="profile-info">
-          <div class="info-item">
-            <span class="info-label">ชื่อ - นามสกุล</span>
-            <span class="info-value">ณัฐทิชา ศรีสุข</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">Name - Surname</span>
-            <span class="info-value">Miss Nadticha Srisuk</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">ชื่อเล่น / อายุ</span>
-            <span class="info-value">ใบตอง / 21 ปี</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">วันเกิด</span>
-            <span class="info-value">30 กันยายน 2547</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">การศึกษา</span>
-            <span class="info-value">ปริญญาตรี วิศวกรรมคอมพิวเตอร์<br>เอกวิศวกรรมซอฟต์แวร์ มรภ.พิบูลสงคราม</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">เบอร์โทรศัพท์</span>
-            <span class="info-value">099-2710383</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">อีเมล</span>
-            <span class="info-value"><a href="mailto:nadticha.s@psru.ac.th" style="color:var(--text-primary); text-decoration:none;">nadticha.s@psru.ac.th</a></span>
-          </div>
-          <div>
-            <span class="info-label">ตำแหน่งที่ต้องการฝึกงาน</span>
-            <div>
-              <span class="target-badge">AI Application Developer</span>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <!-- Circular Avatar with Scan Effect -->
+            <div class="hero-avatar-container">
+                <img class="hero-avatar" src="images/img_3_2.jpeg" alt="Baitong Profile" onerror="this.src='https://placehold.co/150x150/1e1e2e/cdd6f4?text=Baitong'">
             </div>
-          </div>
+            <h1 class="hero-name">Baitong Nadticha</h1>
+            <p class="hero-subtitle">Computer Engineering · Software Engineering</p>
+            <div class="hero-quote">"Make today your masterpiece."</div>
+            <p class="hero-human">
+                Human: <a href="https://github.com/Nadticha30" target="_blank">@Nadticha30</a> · ณัฐทิชา ศรีสุข
+                <br>Born: PSRU, Phitsanulok · 30 Sep 2004
+            </p>
         </div>
-      </section>
+        <div class="scroll-hint">↓ Scroll to explore ↓</div>
+    </section>
 
-      <!-- Right Panel: Statement of Purpose -->
-      <section class="panel">
-        <h2 class="panel-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-          เป้าหมายและแรงบันดาลใจ
-        </h2>
-        <p class="sop-text">
-          ดิฉันเลือกเข้าศึกษาในสาขาวิศวกรรมคอมพิวเตอร์เนื่องจากมีความสนใจในด้านเทคโนโลยีมาตั้งแต่ต้น และเมื่อได้ศึกษาจริงจึงพบว่า สิ่งที่น่าสนใจของสายงานนี้คือกระบวนการคิดเพื่อแก้ปัญหาและการสร้างระบบ จากจุดเริ่มต้นที่ต้องปรับตัวอย่างมาก การได้ลงมือปฏิบัติจริงทำให้เริ่มมีความเข้าใจและสนุกกับการพัฒนาโปรแกรมให้สามารถใช้งานได้จริง
-        </p>
-        <p class="sop-text">
-          ในด้านการเรียน แม้ว่าอาจไม่ได้เป็นคนที่เรียนรู้ทฤษฎีได้รวดเร็วที่สุด แต่ดิฉันได้อาศัยความพยายามและการศึกษาค้นคว้าด้วยตนเองเพิ่มเติมอยู่เสมอ เนื่องจากตระหนักดีว่าสายงานคอมพิวเตอร์มีการเปลี่ยนแปลงของเครื่องมือและเทคโนโลยีใหม่ ๆ ตลอดเวลา ในช่วงที่ผ่านมาจึงได้ทดลองทำโปรเจกต์ที่หลากหลายเพื่อพัฒนาทักษะ ตั้งแต่การจัดการระบบฐานข้อมูล การเขียนโปรแกรมฝั่ง Backend การพัฒนาเกมเพื่อการศึกษา ไปจนถึงการทดลองใช้โมเดลตรวจจับวัตถุ ทุกชิ้นงานเกิดจากการลองผิดลองถูกและแก้ไขปัญหาด้วยตนเอง ซึ่งช่วยให้ดิฉันเข้าใจการทำงานของระบบในภาพรวมได้ดียิ่งขึ้น
-        </p>
-        <p class="sop-text">
-          ดิฉันมีความเชื่อมั่นว่า การได้รับโอกาสเข้าฝึกงานในตำแหน่งนี้ จะเป็นก้าวสำคัญในการนำตรรกะและความรู้จากมหาวิทยาลัยมาประยุกต์ใช้กับโจทย์การทำงานจริง ดิฉันพร้อมที่จะเรียนรู้สิ่งใหม่ ปรับตัว และรับฟังคำแนะนำจากพี่ ๆ ในทีมเพื่อนำมาพัฒนาตนเองอย่างต่อเนื่อง และตั้งใจอย่างยิ่งที่จะใช้ความพยายามและความสามารถที่มีเพื่อช่วยสนับสนุนการทำงานของทีมให้ประสบความสำเร็จ
-        </p>
-      </section>
+    <!-- ===== PROFILE SECTION ===== -->
+    <section class="reveal">
+        <div class="section-label">// background</div>
+        <h2 class="section-title">ข้อมูล <span>ส่วนตัว</span></h2>
+        
+        <div class="profile-grid">
+            <!-- Left Info List -->
+            <div class="info-card">
+                <div class="info-item">
+                    <span class="info-label">ชื่อจริง</span>
+                    <span class="info-val">นางสาวณัฐทิชา ศรีสุข</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">ชื่อเล่น / อายุ</span>
+                    <span class="info-val">ใบตอง / 21 ปี</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">มหาวิทยาลัย</span>
+                    <span class="info-val">มรภ.พิบูลสงคราม</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">สาขา</span>
+                    <span class="info-val">วิศวกรรมคอมพิวเตอร์</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">เป้าหมาย</span>
+                    <span class="info-val" style="color: var(--secondary);">AI Application Developer</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">ช่องทางติดต่อ</span>
+                    <span class="info-val">099-2710383</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">อีเมล</span>
+                    <span class="info-val" style="font-size: 0.85rem;"><a href="mailto:nadticha.s@psru.ac.th" style="color:var(--primary); text-decoration:none;">nadticha.s@psru.ac.th</a></span>
+                </div>
+            </div>
 
-      <!-- Skills Section -->
-      <section class="panel skills-section">
-        <h2 class="panel-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-          ทักษะความสามารถ (Technical Proficiency)
-        </h2>
+            <!-- Right: Statement of Purpose -->
+            <div class="info-card" style="display:flex; flex-direction:column; justify-content:center;">
+                <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.15rem; font-family: 'JetBrains Mono', monospace;">// statement of purpose</h3>
+                <p class="sop-text" style="font-size: 0.95rem;">
+                    ดิฉันเลือกเข้าศึกษาในสาขาวิศวกรรมคอมพิวเตอร์เนื่องจากมีความสนใจในด้านเทคโนโลยีมาตั้งแต่ต้น และเมื่อได้ศึกษาจริงจึงพบว่า สิ่งที่น่าสนใจของสายงานนี้คือกระบวนการคิดเพื่อแก้ปัญหาและการสร้างระบบ จากจุดเริ่มต้นที่ต้องปรับตัวอย่างมาก การได้ลงมือปฏิบัติจริงทำให้เริ่มมีความเข้าใจและสนุกกับการพัฒนาโปรแกรมให้สามารถใช้งานได้จริง
+                </p>
+                <p class="sop-text" style="font-size: 0.95rem;">
+                    ในด้านการเรียน แม้ว่าอาจไม่ได้เป็นคนที่เรียนรู้ทฤษฎีได้รวดเร็วที่สุด แต่ดิฉันได้อาศัยความพยายามและการศึกษาค้นคว้าด้วยตนเองเพิ่มเติมอยู่เสมอ เนื่องจากตระหนักดีว่าสายงานคอมพิวเตอร์มีการเปลี่ยนแปลงของเครื่องมือและเทคโนโลยีใหม่ ๆ ตลอดเวลา ในช่วงที่ผ่านมาจึงได้ทดลองทำโปรเจกต์ที่หลากหลายเพื่อพัฒนาทักษะ ตั้งแต่การจัดการระบบฐานข้อมูล การเขียนโปรแกรมฝั่ง Backend การพัฒนาเกมเพื่อการศึกษา ไปจนถึงการทดลองใช้โมเดลตรวจจับวัตถุ ทุกชิ้นงานเกิดจากการลองผิดลองถูกและแก้ไขปัญหาด้วยตนเอง ซึ่งช่วยให้ดิฉันเข้าใจการทำงานของระบบในภาพรวมได้ดียิ่งขึ้น
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="reveal">
+        <div class="section-label">// statistics</div>
+        <h2 class="section-title">Metrics <span>แผงข้อมูล</span></h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-num" data-count="8">0</div>
+                <div class="stat-label">Projects Built</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" data-count="6">0</div>
+                <div class="stat-label">Tech Stacks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" data-count="8">0</div>
+                <div class="stat-label">Activities</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" data-count="6">0</div>
+                <div class="stat-label">Certificates</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SKILLS SECTION ===== -->
+    <section class="reveal">
+        <div class="section-label">// expertise</div>
+        <h2 class="section-title">ทักษะความ <span>เชี่ยวชาญ</span></h2>
         <div class="skills-grid">
-          
-          <!-- Category 1 -->
-          <div class="skill-card">
-            <div class="skill-category">ภาษาโปรแกรม (Languages)</div>
-            <ul class="skill-list">
-              <li class="skill-item">
-                <div class="skill-name">Python <span>(หลัก)</span></div>
-                <div class="skill-desc">ปัญญาประดิษฐ์ (AI), คอมพิวเตอร์วิทัศน์ (Computer Vision) & การจัดการข้อมูล</div>
-              </li>
-              <li class="skill-item">
-                <div class="skill-name">PHP</div>
-                <div class="skill-desc">การพัฒนา Backend & เชื่อมต่อฐานข้อมูล</div>
-              </li>
-              <li class="skill-item">
-                <div class="skill-name">Java & C</div>
-                <div class="skill-desc">พื้นฐาน OOP & โครงสร้างลอจิก</div>
-              </li>
-              <li class="skill-item">
-                <div class="skill-name">HTML / CSS</div>
-                <div class="skill-desc">การออกแบบหน้าเว็บพื้นฐาน</div>
-              </li>
-            </ul>
-          </div>
+            
+            <div class="skill-card">
+                <div class="skill-cat">Languages</div>
+                <ul class="skill-list">
+                    <li>
+                        <div class="skill-name">Python (Core)</div>
+                        <div class="skill-desc">AI, Computer Vision & Data Handling</div>
+                    </li>
+                    <li>
+                        <div class="skill-name">PHP</div>
+                        <div class="skill-desc">Backend & Database Connectivity</div>
+                    </li>
+                    <li>
+                        <div class="skill-name">Java & C</div>
+                        <div class="skill-desc">OOP Foundations & Core Logic</div>
+                    </li>
+                    <li>
+                        <div class="skill-name">HTML / CSS</div>
+                        <div class="skill-desc">Basic Frontend Responsive Design</div>
+                    </li>
+                </ul>
+            </div>
 
-          <!-- Category 2 -->
-          <div class="skill-card">
-            <div class="skill-category">ระบบฐานข้อมูล (Database)</div>
-            <ul class="skill-list">
-              <li class="skill-item">
-                <div class="skill-name">MySQL</div>
-                <div class="skill-desc">การจัดการฐานข้อมูลเชิงสัมพันธ์</div>
-              </li>
-            </ul>
-          </div>
+            <div class="skill-card">
+                <div class="skill-cat">Database</div>
+                <ul class="skill-list">
+                    <li>
+                        <div class="skill-name">MySQL</div>
+                        <div class="skill-desc">Relational Database Management</div>
+                    </li>
+                </ul>
+            </div>
 
-          <!-- Category 3 -->
-          <div class="skill-card">
-            <div class="skill-category">เครื่องมือพัฒนา & AI</div>
-            <ul class="skill-list">
-              <li class="skill-item">
-                <div class="skill-name">YOLO & OpenCV</div>
-                <div class="skill-desc">การตรวจจับวัตถุ & ประมวลผลภาพ</div>
-              </li>
-              <li class="skill-item">
-                <div class="skill-name">Android Studio & VS Code</div>
-                <div class="skill-desc">เขียนแอปมือถือ & พัฒนาเว็บ/AI</div>
-              </li>
-              <li class="skill-item">
-                <div class="skill-name">Git / GitHub</div>
-                <div class="skill-desc">การควบคุมเวอร์ชันโค้ดและการเก็บงาน</div>
-              </li>
-              <li class="skill-item">
-                <div class="skill-name">AI-Assisted Workflow</div>
-                <div class="skill-desc">ใช้ ChatGPT ช่วยแก้ปัญหาและการเขียนโค้ด</div>
-              </li>
-            </ul>
-          </div>
+            <div class="skill-card">
+                <div class="skill-cat">Tools & AI Stacks</div>
+                <ul class="skill-list">
+                    <li>
+                        <div class="skill-name">YOLO & OpenCV</div>
+                        <div class="skill-desc">Computer Vision & Object Detection</div>
+                    </li>
+                    <li>
+                        <div class="skill-name">Android Studio & VS Code</div>
+                        <div class="skill-desc">IDEs for Mobile & Web Development</div>
+                    </li>
+                    <li>
+                        <div class="skill-name">Git / GitHub</div>
+                        <div class="skill-desc">Version Control & Code Repositories</div>
+                    </li>
+                </ul>
+            </div>
 
-          <!-- Category 4 -->
-          <div class="skill-card">
-            <div class="skill-category">ทักษะการทำงาน (Soft Skills)</div>
-            <ul class="skill-list">
-              <li class="skill-item">
-                <div class="skill-name">การแก้ปัญหา</div>
-                <div class="skill-desc">วิเคราะห์และแก้ไขข้อผิดพลาดด้วยตรรกะ</div>
-              </li>
-              <li class="skill-item">
-                <div class="skill-name">การเรียนรู้ด้วยตนเอง</div>
-                <div class="skill-desc">ขับเคลื่อนด้วยการทำโปรเจกต์และปรับตัวเข้ากับเทคโนโลยีใหม่</div>
-              </li>
-            </ul>
-          </div>
+            <div class="skill-card">
+                <div class="skill-cat">Soft Skills</div>
+                <ul class="skill-list">
+                    <li>
+                        <div class="skill-name">Problem-Solving</div>
+                        <div class="skill-desc">Logic-based error fixing and adaptation</div>
+                    </li>
+                    <li>
+                        <div class="skill-name">Self-Learning</div>
+                        <div class="skill-desc">Project-driven adaptation to new tech</div>
+                    </li>
+                </ul>
+            </div>
 
         </div>
-      </section>
+    </section>
 
-    </div>
+    <!-- ===== PROJECTS ===== -->
+    <section class="reveal">
+        <div class="section-label">// portfolio</div>
+        <h2 class="section-title">ผลงาน <span>ที่สร้างสรรค์</span></h2>
+        <div class="projects-grid">
+            
+            <!-- AI Smart Bin (PDF Project) -->
+            <div class="project-card">
+                <div class="project-img-wrapper">
+                    <img class="project-img" src="images/img_5_5.jpeg" alt="AI Smart Bin Recycle Waste Detection">
+                </div>
+                <div class="project-tag">YOLOv11 · Python</div>
+                <div class="project-title">ระบบตรวจจับขยะรีไซเคิล (AI Smart Bin)</div>
+                <div class="project-desc">ระบบ AI แยกประเภทขยะรีไซเคิลอัตโนมัติ โดยทำการตรวจจับและวิเคราะห์ส่วนประกอบของขวดน้ำรีไซเคิล (ฝาขวด, ฉลากขวด, และน้ำในขวด) เพื่อใช้ระบุความพร้อมในการรีไซเคิล</div>
+                <div class="project-role-badge"><strong>ส่วนที่รับผิดชอบ:</strong> ทำชุดข้อมูล (Dataset) และเทรนโมเดล AI ในส่วนการตรวจจับปริมาณน้ำในขวด</div>
+            </div>
 
-    <!-- PROJECTS SECTION -->
-    <h2 class="section-title">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-      ผลงานและโปรเจกต์ (Projects)
-    </h2>
-    <div class="projects-grid">
-      
-      <!-- Project 1 -->
-      <article class="panel project-card">
-        <div>
-          <!-- Project Showcase Image -->
-          <div class="project-img-container">
-            <img class="project-img" src="images/img_5_5.jpeg" alt="AI Smart Bin Screenshot" onerror="this.src='https://placehold.co/400x200/121218/a1a1aa?text=AI+Smart+Bin'">
-          </div>
-          <div class="project-tags" style="margin-top: 1rem;">
-            <span class="tag">YOLOv11</span>
-            <span class="tag">Roboflow</span>
-            <span class="tag">Python</span>
-            <span class="tag">OpenCV</span>
-          </div>
-          <h3 style="margin-bottom: 0.5rem;">ระบบตรวจจับขยะรีไซเคิล (AI Smart Bin: Recognize Recycle Waste)</h3>
-          <p class="project-desc">
-            ระบบ AI แยกประเภทขยะรีไซเคิลอัตโนมัติ โดยทำการตรวจจับและวิเคราะห์ส่วนประกอบของขวดน้ำรีไซเคิล (ฝาขวด, ฉลากขวด, และน้ำในขวด) เพื่อใช้ระบุและประมวลผลความพร้อมในการรีไซเคิล
-          </p>
+            <!-- Android App (PDF Project) -->
+            <div class="project-card">
+                <div class="project-img-wrapper">
+                    <img class="project-img" src="images/img_5_4.jpeg" alt="Android App Chemistry Cool">
+                </div>
+                <div class="project-tag">Android Studio · Java</div>
+                <div class="project-title">แอปพลิเคชัน Android "เคมีเจ๋ง"</div>
+                <div class="project-desc">โมบายล์แอปพลิเคชันร่วมกับรายวิชาเคมี เพื่อเป็นสื่อการเรียนรู้เรื่องตารางธาตุแบบอินเตอร์แอคทีฟ</div>
+                <div class="project-role-badge"><strong>ส่วนที่รับผิดชอบ:</strong> เขียนโค้ดระบบคำนวณเลขมวลของธาตุ และพัฒนา Logic มินิเกมจับคู่ธาตุพร้อมระบบนับคะแนน</div>
+            </div>
+
+            <!-- Web 1 -->
+            <a href="https://nadticha30.github.io/cv-version2/05-floodboy-webapp/" target="_blank" class="project-card">
+                <div class="project-icon">🌊</div>
+                <div class="project-tag">Smart Contract · Viem.js</div>
+                <div class="project-title">FloodBoy Quantum HUD</div>
+                <div class="project-desc">ระบบตรวจวัดระดับน้ำจาก JIBCHAIN L1 Smart Contract พร้อม Cyberpunk HUD และ Real-time Analytics</div>
+                <div class="project-link">→ LAUNCH DASHBOARD</div>
+            </a>
+
+            <!-- Web 2 -->
+            <a href="https://nadticha30.github.io/cv-version2/06-oracle-stack/" target="_blank" class="project-card">
+                <div class="project-icon">🧱</div>
+                <div class="project-tag">Canvas · MQTT Live</div>
+                <div class="project-title">Oracle Stack Game</div>
+                <div class="project-desc">เกมต่อบล็อค Multiplayer พร้อม MQTT Live Leaderboard เล่นได้ทั้งมือถือและคอม</div>
+                <div class="project-link">→ PLAY GAME</div>
+            </a>
+
+            <!-- Web 3 -->
+            <a href="https://nadticha30.github.io/cv-version2/03-dustboy-dashboard/" target="_blank" class="project-card">
+                <div class="project-icon">🌫️</div>
+                <div class="project-tag">MQTT · Three.js</div>
+                <div class="project-title">DustBoy Aurora HUD</div>
+                <div class="project-desc">แดชบอร์ดฝุ่น PM2.5 แบบ Real-time ด้วย Three.js Reactive 3D Background และระบบ Fuzzy Telemetry</div>
+                <div class="project-link">→ VIEW TELEMETRY</div>
+            </a>
+
+            <!-- Web 4 -->
+            <a href="https://nadticha30.github.io/cv-version2/02-train-portfolio/" target="_blank" class="project-card">
+                <div class="project-icon">🚂</div>
+                <div class="project-tag">Three.js · WebGL</div>
+                <div class="project-title">Phitsanulok 3D Journey</div>
+                <div class="project-desc">การเดินทาง 3D Steam Express ผ่านทิวทัศน์ธรรมชาติ 4 มุมกล้อง พร้อมเอฟเฟกต์ควันและประกายไฟ</div>
+                <div class="project-link">→ EMBARK JOURNEY</div>
+            </a>
+
+            <!-- Web 5 -->
+            <a href="https://nadticha30.github.io/cv-version2/04-gps-map-tracker/" target="_blank" class="project-card">
+                <div class="project-icon">📍</div>
+                <div class="project-tag">Leaflet.js · OpenStreetMap</div>
+                <div class="project-title">GPS Journey Tracker</div>
+                <div class="project-desc">แผนที่ GPS ติดตามเส้นทาง 34 จุดเช็คอิน จากเชียงใหม่สู่พิษณุโลก พร้อมธีม Dark Mode</div>
+                <div class="project-link">→ EXPLORE MAP</div>
+            </a>
+
+            <!-- Web 6 -->
+            <a href="https://nadticha30.github.io/cv-version2/" target="_blank" class="project-card">
+                <div class="project-icon">🏠</div>
+                <div class="project-tag">Glassmorphism · Portal</div>
+                <div class="project-title">Master Portal</div>
+                <div class="project-desc">ศูนย์รวมผลงานทั้งหมด ดีไซน์ Glassmorphism พร้อม HUD Corner Decorations</div>
+                <div class="project-link">→ ENTER PORTAL</div>
+            </a>
+
         </div>
-        <div class="project-role">
-          <strong>บทบาทความรับผิดชอบ:</strong> จัดเตรียมชุดข้อมูล (Dataset) และเทรนโมเดล AI ในส่วนตรวจจับปริมาณน้ำในขวด (Liquid detection)
+    </section>
+
+    <!-- ===== ACTIVITIES ===== -->
+    <section class="reveal">
+        <div class="section-label">// experiences</div>
+        <h2 class="section-title">กิจกรรม <span>ที่เข้าร่วม</span></h2>
+        
+        <div class="activity-card">
+            <div class="activity-date">19 - 21 มีนาคม 2569</div>
+            <div class="activity-details">
+                <h3>PSRU Cyber Hackathon #3</h3>
+                <p>โครงการอบรมเชิงปฏิบัติการและแข่งขันทักษะด้านความปลอดภัยทางไซเบอร์ ณ หอประชุมศรีวชิรโชติ มหาวิทยาลัยราชภัฏพิบูลสงคราม ร่วมกับ สกมช. (NCSA), กฟผ. และบริษัทเทคโนโลยีชั้นนำกว่า 16 แห่ง</p>
+                <div class="activity-gallery">
+                    <img src="images/img_6_3.jpeg" alt="PSRU Cyber Hackathon 3" class="activity-thumb" onerror="this.style.display='none'">
+                    <img src="images/img_6_4.jpeg" alt="PSRU Cyber Hackathon 3 Group" class="activity-thumb" onerror="this.style.display='none'">
+                </div>
+            </div>
         </div>
-      </article>
 
-      <!-- Project 2 -->
-      <article class="panel project-card">
-        <div>
-          <!-- Project Showcase Image -->
-          <div class="project-img-container">
-            <img class="project-img" src="images/img_5_4.jpeg" alt="Android App Chemistry Screenshot" onerror="this.src='https://placehold.co/400x200/121218/a1a1aa?text=Android+Chemistry+App'">
-          </div>
-          <div class="project-tags" style="margin-top: 1rem;">
-            <span class="tag">Android Studio</span>
-            <span class="tag">Java</span>
-            <span class="tag">Mobile App</span>
-          </div>
-          <h3 style="margin-bottom: 0.5rem;">แอปพลิเคชัน Android "เคมีเจ๋ง"</h3>
-          <p class="project-desc">
-            โมบายล์แอปพลิเคชันที่พัฒนาขึ้นร่วมกับรายวิชาเคมี เพื่อส่งเสริมการเรียนรู้เรื่องตารางธาตุผ่านเกมและระบบคำนวณ ช่วยให้นักเรียนเข้าใจสัญลักษณ์ทางเคมีได้ง่ายขึ้น
-          </p>
+        <div class="activity-card">
+            <div class="activity-date">28 กุมภาพันธ์ - 1 มีนาคม 2569</div>
+            <div class="activity-details">
+                <h3>AI Agent Coding Camp</h3>
+                <p>โครงการยกระดับทักษะแห่งอนาคต โดย อาจารย์ ดร.ณัฐ วีระวรรณ (ผู้ก่อตั้ง Chiang Mai Maker Club) ณ คณะเทคโนโลยีอุตสาหกรรม มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
+                <div class="activity-gallery">
+                    <img src="images/img_7_3.jpeg" alt="AI Agent Coding Camp" class="activity-thumb" onerror="this.style.display='none'">
+                    <img src="images/img_7_5.jpeg" alt="AI Agent Coding Camp Lecture" class="activity-thumb" onerror="this.style.display='none'">
+                </div>
+            </div>
         </div>
-        <div class="project-role">
-          <strong>บทบาทความรับผิดชอบ:</strong> พัฒนาระบบ Logic คำนวณเลขมวลของธาตุ และมินิเกมจับคู่การ์ดธาตุพร้อมฟังก์ชันนับคะแนน
+
+        <div class="activity-card">
+            <div class="activity-date">23 มิถุนายน 2569</div>
+            <div class="activity-details">
+                <h3>CyberNet Pro</h3>
+                <p>โครงการเพื่อมุ่งเน้นพัฒนาศักยภาพ อัปสกิลความรู้ด้านระบบเครือข่าย (Network) และความปลอดภัยทางไซเบอร์ (Cybersecurity) ณ ห้องปฏิบัติการคอมพิวเตอร์ คณะเทคโนโลยีอุตสาหกรรม</p>
+                <div class="activity-gallery">
+                    <img src="images/img_7_4.jpeg" alt="CyberNet Pro" class="activity-thumb" onerror="this.style.display='none'">
+                </div>
+            </div>
         </div>
-      </article>
 
-    </div>
-
-    <!-- ACTIVITIES SECTION -->
-    <h2 class="section-title">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-      กิจกรรมที่เข้าร่วม (Activities)
-    </h2>
-    <div class="activities-timeline">
-      
-      <div class="activity-item">
-        <div class="activity-date">19 - 21 มีนาคม 2569</div>
-        <div class="activity-details">
-          <h3>PSRU Cyber Hackathon #3</h3>
-          <p>โครงการอบรมเชิงปฏิบัติการและแข่งขันทักษะด้านความปลอดภัยทางไซเบอร์ ณ หอประชุมศรีวชิรโชติ มหาวิทยาลัยราชภัฏพิบูลสงคราม ร่วมกับ สกมช. (NCSA), กฟผ. และบริษัทเทคโนโลยีชั้นนำกว่า 16 แห่ง</p>
-          <div class="activity-gallery">
-            <img src="images/img_6_3.jpeg" alt="PSRU Cyber Hackathon" class="activity-thumb" onerror="this.style.display='none'">
-            <img src="images/img_6_4.jpeg" alt="PSRU Cyber Hackathon Group" class="activity-thumb" onerror="this.style.display='none'">
-          </div>
+        <div class="activity-card">
+            <div class="activity-date">28 - 29 มิถุนายน 2568</div>
+            <div class="activity-details">
+                <h3>อบรมเปิดประตูสู่โลกแห่ง IoT และระบบอัตโนมัติ</h3>
+                <p>พัฒนาทักษะด้านฮาร์ดแวร์และการเชื่อมต่อระบบอัตโนมัติ ณ สถาบันเทคโนโลยีดิจิทัล มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
+                <div class="activity-gallery">
+                    <img src="images/img_7_6.jpeg" alt="IoT and Automation Training" class="activity-thumb" onerror="this.style.display='none'">
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="activity-item">
-        <div class="activity-date">28 กุมภาพันธ์ - 1 มีนาคม 2569</div>
-        <div class="activity-details">
-          <h3>AI Agent Coding Camp</h3>
-          <p>โครงการยกระดับทักษะแห่งอนาคต โดย อาจารย์ ดร.ณัฐ วีระวรรณ (ผู้ก่อตั้ง Chiang Mai Maker Club) ณ คณะเทคโนโลยีอุตสาหกรรม มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
-          <div class="activity-gallery">
-            <img src="images/img_7_3.jpeg" alt="AI Agent Coding Camp" class="activity-thumb" onerror="this.style.display='none'">
-            <img src="images/img_7_5.jpeg" alt="AI Agent Coding Camp Lecture" class="activity-thumb" onerror="this.style.display='none'">
-          </div>
+        <div class="activity-card">
+            <div class="activity-date">20 ธันวาคม 2568</div>
+            <div class="activity-details">
+                <h3>อบรมพัฒนาทักษะการใช้ AI กับงานวิจัย</h3>
+                <p>การใช้ปัญญาประดิษฐ์ (AI) กับการวิจัยและโครงงานด้านวิศวกรรมคอมพิวเตอร์ ณ โครงการจัดตั้งสถาบันเทคโนโลยีดิจิทัล</p>
+            </div>
         </div>
-      </div>
 
-      <div class="activity-item">
-        <div class="activity-date">23 มิถุนายน 2569</div>
-        <div class="activity-details">
-          <h3>CyberNet Pro</h3>
-          <p>โครงการเพื่อมุ่งเน้นพัฒนาศักยภาพ อัปสกิลความรู้ด้านระบบเครือข่าย (Network) และความปลอดภัยทางไซเบอร์ (Cybersecurity) ณ ห้องปฏิบัติการคอมพิวเตอร์ คณะเทคโนโลยีอุตสาหกรรม</p>
-          <div class="activity-gallery">
-            <img src="images/img_7_4.jpeg" alt="CyberNet Pro" class="activity-thumb" onerror="this.style.display='none'">
-          </div>
+        <div class="activity-card">
+            <div class="activity-date">6 - 7 สิงหาคม 2567</div>
+            <div class="activity-details">
+                <h3>พัฒนาทักษะผู้ประกอบการยุคดิจิทัล</h3>
+                <p>โครงการอบรม “พัฒนาแนวคิดและทักษะความเป็นผู้ประกอบการในยุคดิจิทัล” ณ Idea Lab อาคารหอสมุดอิเล็กทรอนิกส์ (e-Library PSRU)</p>
+            </div>
         </div>
-      </div>
 
-      <div class="activity-item">
-        <div class="activity-date">28 - 29 มิถุนายน 2568</div>
-        <div class="activity-details">
-          <h3>อบรมเปิดประตูสู่โลกแห่ง IoT และระบบอัตโนมัติ</h3>
-          <p>พัฒนาทักษะด้านฮาร์ดแวร์และการเชื่อมต่อระบบอัตโนมัติ ณ สถาบันเทคโนโลยีดิจิทัล มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
-          <div class="activity-gallery">
-            <img src="images/img_7_6.jpeg" alt="IoT Training" class="activity-thumb" onerror="this.style.display='none'">
-          </div>
+        <div class="activity-card">
+            <div class="activity-date">21 สิงหาคม 2567</div>
+            <div class="activity-details">
+                <h3>ออกแบบและติดตั้งระบบ WI-FI</h3>
+                <p>โครงการอบรมภาคปฏิบัติการออกแบบและติดตั้งระบบเครือข่ายไร้สาย Wi-Fi ณ ห้องปฏิบัติการคอมพิวเตอร์ IDT มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
+                <div class="activity-gallery">
+                    <img src="images/img_6_5.jpeg" alt="WI-FI Design and Installation Training" class="activity-thumb" onerror="this.style.display='none'">
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="activity-item">
-        <div class="activity-date">20 ธันวาคม 2568</div>
-        <div class="activity-details">
-          <h3>อบรมพัฒนาทักษะการใช้ AI กับงานวิจัย</h3>
-          <p>การใช้ปัญญาประดิษฐ์ (AI) กับการวิจัยและโครงงานด้านวิศวกรรมคอมพิวเตอร์ ณ โครงการจัดตั้งสถาบันเทคโนโลยีดิจิทัล</p>
+        <div class="activity-card">
+            <div class="activity-date">1 - 2 เมษายน 2567</div>
+            <div class="activity-details">
+                <h3>เตรียมความพร้อมช่างซ่อมไมโครคอมพิวเตอร์</h3>
+                <p>โครงการเตรียมความพร้อมการทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ สาขาช่างซ่อมไมโครคอมพิวเตอร์ ระดับ 1</p>
+                <div class="activity-gallery">
+                    <img src="images/img_6_6.jpeg" alt="Microcomputer Repair Training" class="activity-thumb" onerror="this.style.display='none'">
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="activity-item">
-        <div class="activity-date">6 - 7 สิงหาคม 2567</div>
-        <div class="activity-details">
-          <h3>พัฒนาทักษะผู้ประกอบการยุคดิจิทัล</h3>
-          <p>โครงการอบรม “พัฒนาแนวคิดและทักษะความเป็นผู้ประกอบการในยุคดิจิทัล” ณ Idea Lab อาคารหอสมุดอิเล็กทรอนิกส์ (e-Library PSRU)</p>
+    </section>
+
+    <!-- ===== CERTIFICATES ===== -->
+    <section class="reveal">
+        <div class="section-label">// credentials</div>
+        <h2 class="section-title">เกียรติบัตร <span>ที่ได้รับ</span></h2>
+        <div class="certs-grid">
+            
+            <div class="cert-card">
+                <div class="cert-title">PSRU Cyber Hackathon #3</div>
+                <div class="cert-bottom">
+                    <span>อบรมและแข่งขันทักษะไซเบอร์</span>
+                    <span>มี.ค. 2569</span>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-title">Getting Started in Cybersecurity 3.0</div>
+                <div class="cert-bottom">
+                    <span>ความมั่นคงปลอดภัยไซเบอร์เบื้องต้น</span>
+                    <span>มิ.ย. 2569</span>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-title">Python Essentials 1</div>
+                <div class="cert-bottom">
+                    <span>Cisco Networking Academy</span>
+                    <span>ธ.ค. 2568</span>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-title">Data Visualization & Dashboard Design</div>
+                <div class="cert-bottom">
+                    <span>การออกแบบแดชบอร์ด</span>
+                    <span>มี.ค. 2569</span>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-title">Basic Cybersecurity Lab Course</div>
+                <div class="cert-bottom">
+                    <span>ทักษะปฏิบัติการปลอดภัยไซเบอร์</span>
+                    <span>ก.พ. 2569</span>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-title">โครงการพัฒนาสมรรถนะและทักษะดิจิทัล</div>
+                <div class="cert-bottom">
+                    <span>การวัดความพร้อมสู่ยุคดิจิทัล</span>
+                    <span>ก.พ. 2569</span>
+                </div>
+            </div>
+
         </div>
-      </div>
+    </section>
 
-      <div class="activity-item">
-        <div class="activity-date">21 สิงหาคม 2567</div>
-        <div class="activity-details">
-          <h3>ออกแบบและติดตั้งระบบ WI-FI</h3>
-          <p>โครงการอบรมภาคปฏิบัติการออกแบบและติดตั้งระบบเครือข่ายไร้สาย Wi-Fi ณ ห้องปฏิบัติการคอมพิวเตอร์ IDT มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
-          <div class="activity-gallery">
-            <img src="images/img_6_5.jpeg" alt="WI-FI Training" class="activity-thumb" onerror="this.style.display='none'">
-          </div>
+    <!-- ===== PHILOSOPHY ===== -->
+    <section class="reveal">
+        <div class="section-label">// principles</div>
+        <h2 class="section-title">แนวคิดและ <span>ปรัชญา</span></h2>
+        <div class="philosophy-grid">
+            <div class="philosophy-card">
+                <div class="phi-num">01</div>
+                <h3>🌙 ความมืดคือจุดเริ่มต้น</h3>
+                <p>แรงบันดาลใจมักเกิดขึ้นในความเงียบ — เมื่อเสียงรบกวนหายไป ความคิดสร้างสรรค์จะไหลอย่างอิสระ</p>
+            </div>
+            <div class="philosophy-card">
+                <div class="phi-num">02</div>
+                <h3>✨ Nothing is Deleted</h3>
+                <p>ทุกบรรทัดโค้ดที่เขียน ทุก Error ที่เจอ ล้วนเป็นส่วนหนึ่งของเรา ไม่มีอะไรสูญเปล่า</p>
+            </div>
+            <div class="philosophy-card">
+                <div class="phi-num">03</div>
+                <h3>🎨 Make Today Your Masterpiece</h3>
+                <p>ไม่ต้องรอวันพรุ่งนี้ — ทำวันนี้ให้เป็นผลงานชิ้นเอก ทุกวันคือโอกาสในการสร้างสรรค์</p>
+            </div>
+            <div class="philosophy-card">
+                <div class="phi-num">04</div>
+                <h3>🤝 Humans & AI Collaboration</h3>
+                <p>AI ไม่ได้มาแทนที่มนุษย์ แต่ช่วยปลดปล่อยพลังสร้างสรรค์ล้ำยุคที่ซ่อนอยู่ข้างในให้เป็นจริง</p>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="activity-item">
-        <div class="activity-date">1 - 2 เมษายน 2567</div>
-        <div class="activity-details">
-          <h3>เตรียมความพร้อมช่างซ่อมไมโครคอมพิวเตอร์</h3>
-          <p>โครงการเตรียมความพร้อมการทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ สาขาช่างซ่อมไมโครคอมพิวเตอร์ ระดับ 1</p>
-          <div class="activity-gallery">
-            <img src="images/img_6_6.jpeg" alt="Microcomputer Repair" class="activity-thumb" onerror="this.style.display='none'">
-          </div>
+    <!-- ===== COLLABORATIVE NETWORK ===== -->
+    <section class="reveal">
+        <div class="section-label">// network</div>
+        <h2 class="section-title">โปรเจกต์ <span>อื่นๆ ในเครือข่าย</span></h2>
+        <div class="family-grid">
+            <a href="https://tworivers.buildwithoracle.com" target="_blank" class="family-card">
+                <div class="family-emoji">🏞️</div>
+                <div>
+                    <div class="family-name">Two Rivers</div>
+                    <div class="family-url">tworivers.buildwithoracle.com</div>
+                </div>
+            </a>
+            <a href="https://arthur.buildwithoracle.com" target="_blank" class="family-card">
+                <div class="family-emoji">👑</div>
+                <div>
+                    <div class="family-name">Arthur</div>
+                    <div class="family-url">arthur.buildwithoracle.com</div>
+                </div>
+            </a>
+            <a href="https://phukhao.buildwithoracle.com" target="_blank" class="family-card">
+                <div class="family-emoji">🏔️</div>
+                <div>
+                    <div class="family-name">Phukhao</div>
+                    <div class="family-url">phukhao.buildwithoracle.com</div>
+                </div>
+            </a>
+            <a href="https://thongpraditxcatlab.buildwithoracle.com" target="_blank" class="family-card">
+                <div class="family-emoji">🍺</div>
+                <div>
+                    <div class="family-name">Thong Pradit</div>
+                    <div class="family-url">thongpraditxcatlab.buildwithoracle.com</div>
+                </div>
+            </a>
+            <a href="https://maeoncraft.buildwithoracle.com" target="_blank" class="family-card">
+                <div class="family-emoji">🌿</div>
+                <div>
+                    <div class="family-name">Maeon Craft</div>
+                    <div class="family-url">maeoncraft.buildwithoracle.com</div>
+                </div>
+            </a>
+            <a href="https://gallery.buildwithoracle.com" target="_blank" class="family-card">
+                <div class="family-emoji">🎨</div>
+                <div>
+                    <div class="family-name">Gallery</div>
+                    <div class="family-url">gallery.buildwithoracle.com</div>
+                </div>
+            </a>
         </div>
-      </div>
+    </section>
 
-    </div>
+    <!-- ===== CTA ===== -->
+    <section class="cta-section reveal">
+        <a href="https://nadticha30.github.io/cv-version2/" class="cta-btn" target="_blank">🚀 Explore Full Portfolio</a>
+    </section>
 
-    <!-- CERTIFICATES SECTION -->
-    <h2 class="section-title">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-      เกียรติบัตรที่ได้รับ (Certificates)
-    </h2>
-    <div class="certificates-grid">
-      
-      <div class="cert-card">
-        <h3 class="cert-title">PSRU Cyber Hackathon #3</h3>
-        <div class="cert-meta">
-          <span>อบรมและแข่งขันทักษะไซเบอร์</span>
-          <span>มี.ค. 2569</span>
-        </div>
-      </div>
-
-      <div class="cert-card">
-        <h3 class="cert-title">Getting Started in Cybersecurity 3.0</h3>
-        <div class="cert-meta">
-          <span>ความมั่นคงปลอดภัยไซเบอร์เบื้องต้น</span>
-          <span>มิ.ย. 2569</span>
-        </div>
-      </div>
-
-      <div class="cert-card">
-        <h3 class="cert-title">Python Essentials 1</h3>
-        <div class="cert-meta">
-          <span>Cisco Networking Academy</span>
-          <span>ธ.ค. 2568</span>
-        </div>
-      </div>
-
-      <div class="cert-card">
-        <h3 class="cert-title">Data Visualization & Dashboard Design</h3>
-        <div class="cert-meta">
-          <span>การออกแบบแดชบอร์ดอย่างมีประสิทธิภาพ</span>
-          <span>มี.ค. 2569</span>
-        </div>
-      </div>
-
-      <div class="cert-card">
-        <h3 class="cert-title">Basic Cybersecurity Lab Course</h3>
-        <div class="cert-meta">
-          <span>ทักษะปฏิบัติการความปลอดภัยไซเบอร์</span>
-          <span>ก.พ. 2569</span>
-        </div>
-      </div>
-
-      <div class="cert-card">
-        <h3 class="cert-title">โครงการพัฒนาสมรรถนะและทักษะดิจิทัล</h3>
-        <div class="cert-meta">
-          <span>การวัดและยกระดับความพร้อมสู่ยุคดิจิทัล</span>
-          <span>ก.พ. 2569</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- TERMINAL INTERACTIVE SHIELD -->
-    <h2 class="section-title">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
-      BAITONG CONSOLE v1.0
-    </h2>
-    <div class="panel terminal-panel">
-      <div class="terminal-header">
-        <div class="terminal-dot red"></div>
-        <div class="terminal-dot yellow"></div>
-        <div class="terminal-dot green"></div>
-        <span class="terminal-title">guest@baitong-oracle: ~</span>
-      </div>
-      <div class="terminal-body" id="terminal-body">
-        <p class="term-line output">ยินดีต้อนรับสู่คอนโซลจำลองของใบตอง!</p>
-        <p class="term-line output">พิมพ์ <span class="term-highlight">help</span> เพื่อดูคำสั่งทั้งหมดที่สามารถใช้งานได้</p>
-        <br>
-        <div class="term-input-line">
-          <span class="term-prompt">guest@baitong-oracle:~$</span>
-          <input type="text" id="terminal-input" autocomplete="off" autofocus>
-        </div>
-      </div>
-    </div>
-
-    <!-- PHILOSOPHY / MIDNIGHT MUSE STYLE QUOTES -->
-    <h2 class="section-title">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-      แนวคิดและปรัชญาการทำงาน
-    </h2>
-    <div class="philosophy-grid">
-      <div class="philosophy-card">
-        <h3>🌙 ความมืดคือจุดเริ่มต้น</h3>
-        <p>แรงบันดาลใจมักเกิดขึ้นในความเงียบ — เมื่อเสียงรบกวนภายนอกลดลง ความคิดสร้างสรรค์และลอจิกจะทำงานได้อย่างเสรี</p>
-      </div>
-      <div class="philosophy-card">
-        <h3>✨ Nothing is Deleted</h3>
-        <p>ทุกบรรทัดของโค้ดที่เขียน ทุกบั๊กที่ค้นพบและแก้ไข ล้วนถูกบันทึกไว้เป็นประสบการณ์ที่หล่อหลอมตัวตนของเรา ไม่มีสิ่งใดที่ไร้ความหมาย</p>
-      </div>
-      <div class="philosophy-card">
-        <h3>🎨 Make Today Your Masterpiece</h3>
-        <p>ทำทุกวันและทุกความพยายามในการดีไซน์หรือเขียนระบบให้ยอดเยี่ยมที่สุด เพราะนั่นคือการสะสมผลงานชิ้นเอกของชีวิต</p>
-      </div>
-      <div class="philosophy-card">
-        <h3>🤝 Humans & AI Collaboration</h3>
-        <p>AI คือเครื่องมือที่ช่วยส่งเสริมขีดความสามารถ ปลดปล่อยจินตนาการเพื่อเปลี่ยนโค้ดที่ซับซ้อนให้กลายเป็นงานศิลปะที่ใช้งานได้จริง</p>
-      </div>
-    </div>
-
-    <!-- FOOTER -->
+    <!-- ===== FOOTER ===== -->
     <footer>
-      <p>© 2026 <a href="https://github.com/Nadticha30" target="_blank">Nadticha Srisuk</a>. Built with elegance and quiet focus. PSRU Computer Engineering.</p>
+        <p>🌙 Midnight Muse — พอร์ตโฟลิโอส่วนตัวของ ณัฐทิชา ศรีสุข</p>
+        <p style="margin-top:0.5rem">Made with ✨ at PSRU, Phitsanulok · © 2026 <a href="https://github.com/Nadticha30"
+                target="_blank">Nadticha30</a></p>
     </footer>
 
-  </div>
+    <!-- LIGHTBOX MODAL FOR GALLERY IMAGES -->
+    <div id="lightbox-modal" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div id="lightbox-caption"></div>
+    </div>
 
-  <!-- LIGHTBOX MODAL FOR GALLERY IMAGES -->
-  <div id="lightbox-modal" class="lightbox">
-    <span class="lightbox-close">&times;</span>
-    <img class="lightbox-content" id="lightbox-img">
-    <div id="lightbox-caption"></div>
-  </div>
+    <script>
+        // ===== STARFIELD CANVAS =====
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let W, H, stars = [], shootingStars = [];
 
-  <script src="script.js"></script>
+        function resize() {
+            W = canvas.width = canvas.parentElement.offsetWidth;
+            H = canvas.height = canvas.parentElement.offsetHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        // Create stars
+        for (let i = 0; i < 200; i++) {
+            stars.push({
+                x: Math.random() * 2000 - 500,
+                y: Math.random() * 2000 - 500,
+                r: Math.random() * 1.8 + 0.3,
+                a: Math.random(),
+                speed: Math.random() * 0.3 + 0.05,
+                phase: Math.random() * Math.PI * 2
+            });
+        }
+
+        function spawnShootingStar() {
+            if (Math.random() < 0.006) {
+                shootingStars.push({
+                    x: Math.random() * W,
+                    y: Math.random() * H * 0.4,
+                    len: Math.random() * 80 + 40,
+                    speed: Math.random() * 6 + 4,
+                    angle: Math.PI / 4 + (Math.random() - 0.5) * 0.3,
+                    life: 1
+                });
+            }
+        }
+
+        let t = 0;
+        function drawStars() {
+            ctx.clearRect(0, 0, W, H);
+
+            // Background gradient
+            const bg = ctx.createRadialGradient(W * 0.3, H * 0.3, 0, W * 0.5, H * 0.5, W * 0.8);
+            bg.addColorStop(0, 'rgba(192, 132, 252, 0.03)');
+            bg.addColorStop(0.5, 'rgba(129, 140, 248, 0.02)');
+            bg.addColorStop(1, 'transparent');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, W, H);
+
+            t += 0.005;
+
+            // Stars
+            for (const s of stars) {
+                const twinkle = 0.4 + 0.6 * Math.sin(t * s.speed * 10 + s.phase);
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(192, 132, 252, ${s.a * twinkle})`;
+                ctx.fill();
+
+                // Subtle glow
+                if (s.r > 1.2) {
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.r * 3, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(192, 132, 252, ${s.a * twinkle * 0.08})`;
+                    ctx.fill();
+                }
+            }
+
+            // Shooting stars
+            spawnShootingStar();
+            for (let i = shootingStars.length - 1; i >= 0; i--) {
+                const ss = shootingStars[i];
+                const dx = Math.cos(ss.angle) * ss.speed;
+                const dy = Math.sin(ss.angle) * ss.speed;
+                ss.x += dx; ss.y += dy;
+                ss.life -= 0.015;
+
+                if (ss.life <= 0) { shootingStars.splice(i, 1); continue; }
+
+                const grad = ctx.createLinearGradient(
+                    ss.x, ss.y,
+                    ss.x - Math.cos(ss.angle) * ss.len,
+                    ss.y - Math.sin(ss.angle) * ss.len
+                );
+                grad.addColorStop(0, `rgba(251, 191, 36, ${ss.life})`);
+                grad.addColorStop(1, 'transparent');
+
+                ctx.beginPath();
+                ctx.moveTo(ss.x, ss.y);
+                ctx.lineTo(
+                    ss.x - Math.cos(ss.angle) * ss.len,
+                    ss.y - Math.sin(ss.angle) * ss.len
+                );
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            }
+
+            // Moon glow
+            const moonX = W * 0.78, moonY = H * 0.18;
+            const moonGlow = ctx.createRadialGradient(moonX, moonY, 0, moonX, moonY, 120);
+            moonGlow.addColorStop(0, 'rgba(251, 191, 36, 0.06)');
+            moonGlow.addColorStop(0.5, 'rgba(192, 132, 252, 0.03)');
+            moonGlow.addColorStop(1, 'transparent');
+            ctx.fillStyle = moonGlow;
+            ctx.fillRect(moonX - 150, moonY - 150, 300, 300);
+
+            requestAnimationFrame(drawStars);
+        }
+        drawStars();
+
+        // ===== SCROLL REVEAL =====
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => scrollObserver.observe(el));
+
+        // ===== COUNTER ANIMATION =====
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const nums = entry.target.querySelectorAll('[data-count]');
+                    nums.forEach(num => {
+                        const target = parseInt(num.dataset.count);
+                        let current = 0;
+                        const step = Math.max(1, Math.floor(target / 30));
+                        const timer = setInterval(() => {
+                            current += step;
+                            if (current >= target) { current = target; clearInterval(timer); }
+                            num.textContent = current;
+                        }, 40);
+                    });
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.stats-grid').forEach(el => counterObserver.observe(el));
+
+        // ===== INTRO SEQUENCE =====
+        const intro = document.getElementById('intro');
+        const introText = document.getElementById('intro-text');
+        const phrases = [
+            "ACCESSING MIDNIGHT_VAULT...",
+            "DECRYPTING MASTERPIECE...",
+            "CALIBRATING MUSE_SYSTEM...",
+            "AUTHORIZING: BAITONG_NADTICHA",
+            "WELCOME TO MIDNIGHT MUSE."
+        ];
+
+        async function runIntro() {
+            for (let phrase of phrases) {
+                introText.innerHTML = '';
+                introText.style.width = '0';
+                await new Promise(r => setTimeout(r, 100));
+                introText.innerHTML = phrase;
+                introText.style.width = '100%';
+                introText.style.transition = `width ${phrase.length * 50}ms steps(${phrase.length})`;
+                await new Promise(r => setTimeout(r, phrase.length * 50 + 800));
+            }
+            intro.style.opacity = '0';
+            setTimeout(() => intro.style.display = 'none', 1000);
+            setTimeout(() => document.querySelector('.hero-content').classList.add('active'), 200);
+        }
+        runIntro();
+
+        // System Time
+        setInterval(() => {
+            document.getElementById('status-time').textContent = new Date().toLocaleTimeString();
+        }, 1000);
+
+        // ===== 3D TILT EFFECT =====
+        const card = document.querySelector('.hero-content');
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        document.addEventListener('mouseleave', () => {
+            card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+
+        // ===== LIGHTBOX MODAL =====
+        const modal = document.getElementById('lightbox-modal');
+        const modalImg = document.getElementById('lightbox-img');
+        const captionText = document.getElementById('lightbox-caption');
+        const closeBtn = document.querySelector('.lightbox-close');
+
+        const galleryItems = document.querySelectorAll('.project-img, .activity-thumb');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                modal.style.display = 'block';
+                modalImg.src = item.src;
+                captionText.textContent = item.alt;
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
 </body>
+
 </html>
