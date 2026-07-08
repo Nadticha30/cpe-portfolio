@@ -66,7 +66,8 @@
         .hero-content {
             position: relative;
             z-index: 10;
-            max-width: 680px;
+            max-width: 820px;
+            width: 100%;
             background: var(--glass);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border);
@@ -85,16 +86,30 @@
             transition: opacity 1s, transform 1s;
         }
 
-        /* Profile Picture with float animation */
+        /* Profile Picture - half body portrait */
+        .hero-card-inner {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            text-align: left;
+        }
+
+        @media (max-width: 650px) {
+            .hero-card-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
         .hero-avatar-container {
             position: relative;
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 1.5rem auto;
-            border-radius: 50%;
+            flex-shrink: 0;
+            width: 220px;
+            height: 290px;
+            border-radius: 20px;
             border: 2px solid var(--primary);
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(192, 132, 252, 0.4);
+            box-shadow: 0 0 40px rgba(192, 132, 252, 0.4), 0 20px 60px rgba(0,0,0,0.4);
             animation: float 4s ease-in-out infinite;
         }
 
@@ -102,6 +117,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center top;
         }
 
         @keyframes float {
@@ -387,8 +403,8 @@
         /* ===== PROJECTS ===== */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 2.5rem;
         }
 
         .project-card {
@@ -416,10 +432,10 @@
         .project-img-wrapper {
             position: relative;
             width: 100%;
-            height: 200px;
+            height: 260px;
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(192,132,252,0.15);
             background: #000;
             cursor: pointer;
         }
@@ -526,18 +542,20 @@
         }
 
         .activity-thumb {
-            width: 110px;
-            height: 75px;
+            width: 200px;
+            height: 140px;
             object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(192, 132, 252, 0.2);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
         }
 
         .activity-thumb:hover {
             border-color: var(--primary);
-            transform: scale(1.05);
+            transform: scale(1.04);
+            box-shadow: 0 8px 28px rgba(192,132,252,0.2);
         }
 
         /* ===== CERTIFICATES ===== */
@@ -803,10 +821,12 @@
     <section class="hero">
         <canvas id="hero-canvas"></canvas>
         <div class="hero-content">
+            <div class="hero-card-inner">
             <!-- Circular Avatar with Scan Effect -->
             <div class="hero-avatar-container">
-                <img class="hero-avatar" src="images/profile_123.jpg" alt="Baitong Profile" onerror="this.src='images/img_3_2.jpeg'">
+                <img class="hero-avatar" src="images/sothosor.jpg" alt="Baitong Profile" onerror="this.src='images/profile_123.jpg'; this.onerror=function(){this.src='images/img_3_2.jpeg'};">
             </div>
+            <div class="hero-text">
             <h1 class="hero-name">Baitong Nadticha</h1>
             <p class="hero-subtitle">Computer Engineering · Software Engineering</p>
             <div class="hero-quote">"Make today your masterpiece."</div>
@@ -814,6 +834,8 @@
                 Human: <a href="https://github.com/Nadticha30" target="_blank">@Nadticha30</a> · ณัฐทิชา ศรีสุข
                 <br>Born: PSRU, Phitsanulok · 30 Sep 2004
             </p>
+            </div>
+            </div>
         </div>
         <div class="scroll-hint">↓ Scroll to explore ↓</div>
     </section>
@@ -1008,7 +1030,8 @@
                 <h3>PSRU Cyber Hackathon #3</h3>
                 <p>โครงการอบรมเชิงปฏิบัติการและแข่งขันทักษะด้านความปลอดภัยทางไซเบอร์ ณ หอประชุมศรีวชิรโชติ มหาวิทยาลัยราชภัฏพิบูลสงคราม ร่วมกับ สกมช. (NCSA), กฟผ. และบริษัทเทคโนโลยีชั้นนำกว่า 16 แห่ง</p>
                 <div class="activity-gallery">
-                    <img src="images/cert_hackathon.jpg" alt="PSRU Cyber Hackathon 3" class="activity-thumb" onerror="this.src='images/img_6_3.jpeg'">
+                    <img src="images/img_6_3.jpeg" alt="PSRU Cyber Hackathon 3" class="activity-thumb">
+                    <img src="images/img_6_4.jpeg" alt="PSRU Cyber Hackathon 3 Group" class="activity-thumb">
                 </div>
             </div>
         </div>
@@ -1019,8 +1042,10 @@
                 <h3>AI Agent Coding Camp</h3>
                 <p>โครงการยกระดับทักษะแห่งอนาคต โดย อาจารย์ ดร.ณัฐ วีระวรรณ (ผู้ก่อตั้ง Chiang Mai Maker Club) ณ คณะเทคโนโลยีอุตสาหกรรม มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
                 <div class="activity-gallery">
-                    <img src="images/ai_camp_1.jpg" alt="AI Agent Coding Camp 1" class="activity-thumb" onerror="this.src='images/img_7_3.jpeg'">
-                    <img src="images/ai_camp_2.jpg" alt="AI Agent Coding Camp 2" class="activity-thumb" onerror="this.style.display='none'">
+                    <img src="images/img_7_3.jpeg" alt="AI Agent Coding Camp 1" class="activity-thumb">
+                    <img src="images/img_7_5.jpeg" alt="AI Agent Coding Camp 2" class="activity-thumb">
+                    <img src="images/ai_camp_1.jpg" alt="AI Agent Coding Camp 3" class="activity-thumb">
+                    <img src="images/ai_camp_2.jpg" alt="AI Agent Coding Camp 4" class="activity-thumb">
                 </div>
             </div>
         </div>
@@ -1031,7 +1056,8 @@
                 <h3>CyberNet Pro</h3>
                 <p>โครงการเพื่อมุ่งเน้นพัฒนาศักยภาพ อัปสกิลความรู้ด้านระบบเครือข่าย (Network) และความปลอดภัยทางไซเบอร์ (Cybersecurity) ณ ห้องปฏิบัติการคอมพิวเตอร์ คณะเทคโนโลยีอุตสาหกรรม</p>
                 <div class="activity-gallery">
-                    <img src="images/cybernet.jpg" alt="CyberNet Pro" class="activity-thumb" onerror="this.src='images/img_7_4.jpeg'">
+                    <img src="images/img_7_4.jpeg" alt="CyberNet Pro" class="activity-thumb">
+                    <img src="images/cybernet.jpg" alt="CyberNet Pro 2" class="activity-thumb">
                 </div>
             </div>
         </div>
@@ -1042,7 +1068,8 @@
                 <h3>อบรมเปิดประตูสู่โลกแห่ง IoT และระบบอัตโนมัติ</h3>
                 <p>พัฒนาทักษะด้านฮาร์ดแวร์และการเชื่อมต่อระบบอัตโนมัติ ณ สถาบันเทคโนโลยีดิจิทัล มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
                 <div class="activity-gallery">
-                    <img src="images/iot.jpg" alt="IoT and Automation Training" class="activity-thumb" onerror="this.src='images/img_7_6.jpeg'">
+                    <img src="images/img_7_6.jpeg" alt="IoT and Automation Training" class="activity-thumb">
+                    <img src="images/iot.jpg" alt="IoT Training 2" class="activity-thumb">
                 </div>
             </div>
         </div>
@@ -1053,7 +1080,7 @@
                 <h3>อบรมพัฒนาทักษะการใช้ AI กับงานวิจัย</h3>
                 <p>การใช้ปัญญาประดิษฐ์ (AI) กับการวิจัยและโครงงานด้านวิศวกรรมคอมพิวเตอร์ ณ โครงการจัดตั้งสถาบันเทคโนโลยีดิจิทัล</p>
                 <div class="activity-gallery">
-                    <img src="images/ai_research.jpg" alt="AI with Research" class="activity-thumb" onerror="this.style.display='none'">
+                    <img src="images/ai_research.jpg" alt="AI with Research" class="activity-thumb">
                 </div>
             </div>
         </div>
@@ -1072,7 +1099,8 @@
                 <h3>ออกแบบและติดตั้งระบบ WI-FI</h3>
                 <p>โครงการอบรมภาคปฏิบัติการออกแบบและติดตั้งระบบเครือข่ายไร้สาย Wi-Fi ณ ห้องปฏิบัติการคอมพิวเตอร์ IDT มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
                 <div class="activity-gallery">
-                    <img src="images/wifi.jpg" alt="WI-FI Design and Installation Training" class="activity-thumb" onerror="this.src='images/img_6_5.jpeg'">
+                    <img src="images/img_6_5.jpeg" alt="WI-FI Design and Installation Training" class="activity-thumb">
+                    <img src="images/wifi.jpg" alt="WI-FI Training 2" class="activity-thumb">
                 </div>
             </div>
         </div>
@@ -1083,7 +1111,8 @@
                 <h3>เตรียมความพร้อมช่างซ่อมไมโครคอมพิวเตอร์</h3>
                 <p>โครงการเตรียมความพร้อมการทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ สาขาช่างซ่อมไมโครคอมพิวเตอร์ ระดับ 1</p>
                 <div class="activity-gallery">
-                    <img src="images/repair.jpg" alt="Microcomputer Repair Training" class="activity-thumb" onerror="this.src='images/img_6_6.jpeg'">
+                    <img src="images/img_6_6.jpeg" alt="Microcomputer Repair Training" class="activity-thumb">
+                    <img src="images/repair.jpg" alt="Microcomputer Repair 2" class="activity-thumb">
                 </div>
             </div>
         </div>
