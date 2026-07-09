@@ -5,11 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>CPE Portfolio — ณัฐทิชา ศรีสุข (ใบตอง)</title>
-    <meta name="description"
-        content="พอร์ตโฟลิโอวิศวกรรมคอมพิวเตอร์ ของ ใบตอง ณัฐทิชา ศรีสุข มหาวิทยาลัยราชภัฏพิบูลสงคราม">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;700;900&display=swap"
-        rel="stylesheet">
+    <meta name="description" content="พอร์ตโฟลิโอวิศวกรรมคอมพิวเตอร์ ของ ใบตอง ณัฐทิชา ศรีสุข มหาวิทยาลัยราชภัฏพิบูลสงคราม">
+    <meta name="author" content="ณัฐทิชา ศรีสุข">
+    <meta name="theme-color" content="#c084fc">
+    <!-- Open Graph -->
+    <meta property="og:title" content="CPE Portfolio — Baitong Nadticha">
+    <meta property="og:description" content="Computer Engineering Portfolio | PSRU | AI Application Developer">
+    <meta property="og:type" content="website">
+    <!-- Preconnect for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #0d1117;
@@ -238,7 +244,7 @@
         /* ===== PROFILE INFO ===== */
         .profile-grid {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
+            grid-template-columns: 1fr 1fr;
             gap: 2rem;
         }
 
@@ -278,17 +284,66 @@
             text-align: right;
         }
 
+        /* SOP Section - Full Width Below Profile */
+        .sop-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sop-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 8rem;
+            font-family: Georgia, serif;
+            color: rgba(192, 132, 252, 0.06);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .sop-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 4px 0 0 4px;
+        }
+
+        .sop-header {
+            color: var(--secondary);
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
         .sop-text {
-            font-size: 1.02rem;
+            font-size: 1rem;
             color: var(--text);
             text-indent: 2.5rem;
             text-align: justify;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
+            line-height: 2;
+            position: relative;
+            z-index: 1;
         }
 
-        .sop-text:last-child {
-            margin-bottom: 0;
+        @media (max-width: 768px) {
+            .sop-card {
+                padding: 2rem 1.5rem 2rem 2rem;
+            }
         }
 
         /* ===== STATS ===== */
@@ -561,8 +616,8 @@
         /* ===== CERTIFICATES ===== */
         .certs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
         }
 
         .cert-card {
@@ -570,73 +625,114 @@
             backdrop-filter: blur(20px);
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 2rem;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            min-height: 170px;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
         }
 
         .cert-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px) scale(1.01);
             border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(192, 132, 252, 0.08);
+            box-shadow: 0 20px 50px rgba(192, 132, 252, 0.2), 0 0 0 1px var(--primary);
+        }
+
+        .cert-img-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1.414 / 1;
+            overflow: hidden;
+            background: #0a0c10;
+        }
+
+        .cert-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.5s ease, opacity 0.3s;
+            opacity: 0.9;
+        }
+
+        .cert-card:hover .cert-img {
+            transform: scale(1.06);
+            opacity: 1;
+        }
+
+        .cert-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(13,17,23,0.85) 100%);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            padding-bottom: 1rem;
+        }
+
+        .cert-card:hover .cert-img-overlay {
+            opacity: 1;
+        }
+
+        .cert-view-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: var(--text);
+            background: rgba(192, 132, 252, 0.25);
+            border: 1px solid var(--primary);
+            padding: 6px 16px;
+            border-radius: 100px;
+            backdrop-filter: blur(10px);
+        }
+
+        .cert-badge {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            background: rgba(13,17,23,0.8);
+            border: 1px solid rgba(192,132,252,0.3);
+            padding: 4px 10px;
+            border-radius: 100px;
+            backdrop-filter: blur(10px);
+        }
+
+        .cert-info {
+            padding: 1.2rem 1.5rem 1.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
         .cert-title {
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 700;
             line-height: 1.4;
             color: var(--text);
         }
 
-        .cert-bottom {
+        .cert-meta {
             display: flex;
             justify-content: space-between;
-            font-size: 0.8rem;
+            align-items: center;
+            font-size: 0.78rem;
             color: var(--muted);
-            margin-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 0.6rem;
+            margin-top: 0.3rem;
         }
 
-        /* ===== PHILOSOPHY ===== */
-        .philosophy-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .philosophy-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .philosophy-card .phi-num {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 3rem;
-            font-weight: 900;
-            color: rgba(192, 132, 252, 0.1);
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-        }
-
-        .philosophy-card h3 {
-            font-size: 1.1rem;
+        .cert-meta-issuer {
             color: var(--secondary);
-            margin-bottom: 0.8rem;
-        }
-
-        .philosophy-card p {
-            font-size: 0.9rem;
-            color: var(--muted);
-            line-height: 1.7;
+            font-weight: 600;
         }
 
         /* ===== LIGHTBOX MODAL ===== */
@@ -708,6 +804,17 @@
         footer a {
             color: var(--primary);
             text-decoration: none;
+        }
+
+        /* ===== IMAGE LOADING SKELETON ===== */
+        img {
+            transition: opacity 0.4s ease;
+        }
+        img[loading="lazy"] {
+            opacity: 0;
+        }
+        img[loading="lazy"].loaded {
+            opacity: 1;
         }
 
         /* ===== REVEAL ANIMATION ===== */
@@ -824,16 +931,14 @@
             <div class="hero-card-inner">
             <!-- Circular Avatar with Scan Effect -->
             <div class="hero-avatar-container">
-                <img class="hero-avatar" src="images/img_3_2.jpeg" alt="Baitong Profile" onerror="this.src='images/profile_123.jpg'">
+                <img class="hero-avatar" src="images/img_3_2.jpeg" alt="Baitong Nadticha - CPE Portfolio" onerror="this.src='images/profile_123.jpg'" fetchpriority="high">
             </div>
             <div class="hero-text">
-            <h1 class="hero-name">Baitong Nadticha</h1>
-            <p class="hero-subtitle">Computer Engineering · Software Engineering</p>
-            <div class="hero-quote">"Make today your masterpiece."</div>
-            <p class="hero-human">
-                Human: <a href="https://github.com/Nadticha30" target="_blank">@Nadticha30</a> · ณัฐทิชา ศรีสุข
-                <br>Born: PSRU, Phitsanulok · 30 Sep 2004
-            </p>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: clamp(0.75rem, 1.5vw, 0.9rem); color: var(--primary); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 0.3rem;">PORTFOLIO</div>
+                <h1 class="hero-name" style="margin-bottom: 0.8rem;">Nadticha Srisuk</h1>
+                <p class="hero-subtitle" style="margin-bottom: 0.6rem;">Computer Engineering · Software Engineering</p>
+                <p style="font-family: 'JetBrains Mono', monospace; font-size: clamp(0.7rem, 1.5vw, 0.85rem); color: var(--secondary); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.4rem;">ENGINEERING & INDUSTRIAL TECHNOLOGY</p>
+                <p style="font-family: 'JetBrains Mono', monospace; font-size: clamp(0.65rem, 1.5vw, 0.8rem); color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin: 0;">PIBULLSONGKRAM RAJABHAT UNIVERSITY</p>
             </div>
             </div>
         </div>
@@ -843,11 +948,12 @@
     <!-- ===== PROFILE SECTION ===== -->
     <section class="reveal">
         <div class="section-label">// background</div>
-        <h2 class="section-title">ข้อมูล <span>ส่วนตัว</span></h2>
+        <h2 class="section-title">PERSONAL <span>PROFILE</span></h2>
         
         <div class="profile-grid">
-            <!-- Left Info List -->
-            <div class="info-card">
+            <!-- Personal Info Card -->
+            <div class="info-card" style="padding: 2rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 2px;">// personal info</h3>
                 <div class="info-item">
                     <span class="info-label">ชื่อจริง</span>
                     <span class="info-val">นางสาวณัฐทิชา ศรีสุข</span>
@@ -857,44 +963,50 @@
                     <span class="info-val">ใบตอง / 21 ปี</span>
                 </div>
                 <div class="info-item">
-                    <span class="info-label">มหาวิทยาลัย</span>
-                    <span class="info-val">มรภ.พิบูลสงคราม</span>
+                    <span class="info-label">วันเกิด</span>
+                    <span class="info-val">30 กันยายน 2547</span>
                 </div>
                 <div class="info-item">
-                    <span class="info-label">สาขา</span>
+                    <span class="info-label">การศึกษา</span>
                     <span class="info-val">วิศวกรรมคอมพิวเตอร์</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">เป้าหมาย</span>
-                    <span class="info-val" style="color: var(--secondary);">AI Application Developer</span>
+                    <span class="info-val" style="color: var(--secondary);">AI Developer</span>
                 </div>
+            </div>
+
+            <!-- Contact Info Card -->
+            <div class="info-card" style="padding: 2rem; display: flex; flex-direction: column;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 2px;">// contact info</h3>
                 <div class="info-item">
-                    <span class="info-label">ช่องทางติดต่อ</span>
+                    <span class="info-label">เบอร์โทรศัพท์</span>
                     <span class="info-val">099-2710383</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">อีเมล</span>
-                    <span class="info-val" style="font-size: 0.85rem;"><a href="mailto:nadticha.s@psru.ac.th" style="color:var(--primary); text-decoration:none;">nadticha.s@psru.ac.th</a></span>
+                    <span class="info-val" style="font-size: 0.85rem;"><a href="mailto:nadticha.s@psru.ac.th" style="color:var(--text); text-decoration:none;">nadticha.s@psru.ac.th</a></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">GitHub</span>
+                    <span class="info-val" style="font-size: 0.85rem;"><a href="https://github.com/Nadticha30" target="_blank" style="color:var(--primary); text-decoration:none;">github.com/Nadticha30</a></span>
                 </div>
             </div>
+        </div>
 
-            <!-- Right: Statement of Purpose -->
-            <div class="info-card" style="display:flex; flex-direction:column; justify-content:center;">
-                <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.15rem; font-family: 'JetBrains Mono', monospace;">// statement of purpose</h3>
-                <p class="sop-text">
-                    ดิฉันเลือกเข้าศึกษาในสาขาวิศวกรรมคอมพิวเตอร์เนื่องจากมีความสนใจในด้านเทคโนโลยีมาตั้งแต่ต้น และเมื่อได้ศึกษาจริงจึงพบว่า สิ่งที่น่าสนใจของสายงานนี้คือกระบวนการคิดเพื่อแก้ปัญหาและการสร้างระบบ จากจุดเริ่มต้นที่ต้องปรับตัวอย่างมาก การได้ลงมือปฏิบัติจริงทำให้เริ่มมีความเข้าใจและสนุกกับการพัฒนาโปรแกรมให้สามารถใช้งานได้จริง
-                </p>
-                <p class="sop-text">
-                    ในด้านการเรียน แม้ว่าอาจไม่ได้เป็นคนที่เรียนรู้ทฤษฎีได้รวดเร็วที่สุด แต่ดิฉันได้อาศัยความพยายามและการศึกษาค้นคว้าด้วยตนเองเพิ่มเติมอยู่เสมอ เนื่องจากตระหนักดีว่าสายงานคอมพิวเตอร์มีการเปลี่ยนแปลงของเครื่องมือและเทคโนโลยีใหม่ ๆ ตลอดเวลา ในช่วงที่ผ่านมาจึงได้ทดลองทำโปรเจกต์ที่หลากหลายเพื่อพัฒนาทักษะ ตั้งแต่การจัดการระบบฐานข้อมูล การเขียนโปรแกรมฝั่ง Backend การพัฒนาเกมเพื่อการศึกษา ไปจนถึงการทดลองใช้โมเดลตรวจจับวัตถุ ทุกชิ้นงานเกิดจากการลองผิดลองถูกและแก้ไขปัญหาด้วยตนเอง ซึ่งช่วยให้ดิฉันเข้าใจการทำงานของระบบในภาพรวมได้ดียิ่งขึ้น
-                </p>
-            </div>
+        <!-- Statement of Purpose - Full Width -->
+        <div class="sop-card">
+            <h3 class="sop-header">// statement of purpose</h3>
+            <p class="sop-text">
+                ดิฉันเลือกศึกษาต่อในสาขาวิศวกรรมคอมพิวเตอร์จากความสนใจในด้านการออกแบบระบบและการคิดแก้ไขปัญหา โดยตลอดระยะเวลาการเรียนรู้ ดิฉันมุ่งพัฒนาทักษะจากการปฏิบัติจริง ทั้งการออกแบบฐานข้อมูล การพัฒนาระบบ Backend การพัฒนาเกมเพื่อการศึกษา ตลอดจนการประยุกต์ใช้โมเดลวิเคราะห์ความพร้อมขยะรีไซเคิลด้วย AI ดิฉันเป็นคนพร้อมเรียนรู้สิ่งใหม่ ๆ ตลอดเวลา และมีความมุ่งมั่นที่จะพัฒนาตนเองเพื่อก้าวไปสู่สายงาน AI Developer ในอนาคต
+            </p>
         </div>
     </section>
 
     <!-- ===== STATS ===== -->
     <section class="reveal">
         <div class="section-label">// statistics</div>
-        <h2 class="section-title">Metrics <span>แผงข้อมูล</span></h2>
+        <h2 class="section-title">METRICS <span>DASHBOARD</span></h2>
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-num" data-count="2">0</div>
@@ -905,7 +1017,7 @@
                 <div class="stat-label">Tech Stacks</div>
             </div>
             <div class="stat-card">
-                <div class="stat-num" data-count="8">0</div>
+                <div class="stat-num" data-count="9">0</div>
                 <div class="stat-label">Activities</div>
             </div>
             <div class="stat-card">
@@ -918,7 +1030,7 @@
     <!-- ===== SKILLS SECTION ===== -->
     <section class="reveal">
         <div class="section-label">// expertise</div>
-        <h2 class="section-title">ทักษะความ <span>เชี่ยวชาญ</span></h2>
+        <h2 class="section-title">SKILLS & <span>EXPERTISE</span></h2>
         <div class="skills-grid">
             
             <div class="skill-card">
@@ -991,13 +1103,14 @@
     <!-- ===== PROJECTS ===== -->
     <section class="reveal">
         <div class="section-label">// portfolio</div>
-        <h2 class="section-title">ผลงาน <span>ที่สร้างสรรค์</span></h2>
+        <h2 class="section-title">CREATIVE <span>PROJECTS</span></h2>
         <div class="projects-grid">
             
             <!-- AI Smart Bin (PDF Project) -->
             <div class="project-card">
-                <div class="project-img-wrapper">
-                    <img class="project-img" src="images/img_5_5.jpeg" alt="AI Smart Bin Recycle Waste Detection">
+                <div class="project-img-wrapper" style="display: flex; gap: 8px;">
+                    <img class="project-img" src="images/S__59891720.jpg" alt="AI Smart Bin 1" style="width: calc(50% - 4px); height: 100%; object-fit: cover;" loading="lazy">
+                    <img class="project-img" src="images/messageImage_1782580571322.jpg" alt="AI Smart Bin 2" style="width: calc(50% - 4px); height: 100%; object-fit: cover;" loading="lazy">
                 </div>
                 <div class="project-tag">YOLOv11 · Python</div>
                 <h3 class="project-title">ระบบตรวจจับขยะรีไซเคิล (AI Smart Bin)</h3>
@@ -1007,8 +1120,9 @@
 
             <!-- Android App (PDF Project) -->
             <div class="project-card">
-                <div class="project-img-wrapper">
-                    <img class="project-img" src="images/img_5_4.jpeg" alt="Android App Chemistry Cool">
+                <div class="project-img-wrapper" style="display: flex; gap: 8px;">
+                    <img class="project-img" src="images/S__59891722.jpg" alt="Android App Chemistry Cool 1" style="width: calc(50% - 4px); height: 100%; object-fit: cover;" loading="lazy">
+                    <img class="project-img" src="images/S__59891718.jpg" alt="Android App Chemistry Cool 2" style="width: calc(50% - 4px); height: 100%; object-fit: cover;" loading="lazy">
                 </div>
                 <div class="project-tag">Android Studio · Java</div>
                 <h3 class="project-title">แอปพลิเคชัน Android "เคมีเจ๋ง"</h3>
@@ -1022,18 +1136,34 @@
     <!-- ===== ACTIVITIES ===== -->
     <section class="reveal">
         <div class="section-label">// experiences</div>
-        <h2 class="section-title">กิจกรรม <span>ที่เข้าร่วม</span></h2>
+        <h2 class="section-title">ACTIVITIES & <span>EXPERIENCES</span></h2>
         
+        <div class="activity-card">
+            <div class="activity-date">2566 - ปัจจุบัน</div>
+            <div class="activity-details">
+                <h3>หัวหน้าฝ่ายสวัสดิการ | สโมสรนักศึกษา คณะวิศวกรรมศาสตร์และเทคโนโลยีอุตสาหกรรม</h3>
+                <p>
+                    <strong>Resource Planning:</strong> วางแผนคำนวณปริมาณอาหาร เครื่องดื่ม และอุปกรณ์สวัสดิการ ให้สอดคล้องกับจำนวนผู้เข้าร่วมกิจกรรมคณะได้อย่างแม่นยำและเพียงพอ<br>
+                    <strong>Procurement & Logistics:</strong> บริหารจัดการระบบจัดซื้อ ประสานงานกับร้านค้า/ซัพพลายเออร์ และควบคุมการจัดส่งสินค้าให้ตรงตามเวลาที่กำหนด<br>
+                    <strong>Cross-Functional Teamwork:</strong> มีความยืดหยุ่นสูง พร้อมเข้าช่วยซัพพอร์ตและแก้ไขปัญหาหน้างานร่วมกับฝ่ายอื่น ๆ ทันทีหลังจากเสร็จสิ้นภารกิจหลัก
+                </p>
+                <div class="activity-gallery">
+                    <img src="images/สโมสร.jpg" alt="สโมสรนักศึกษา - 1" class="activity-thumb" loading="lazy">
+                    <img src="images/สโมสร2.jpg" alt="สโมสรนักศึกษา - 2" class="activity-thumb" loading="lazy">
+                    <img src="images/สโมสร3.jpg" alt="สโมสรนักศึกษา - 3" class="activity-thumb" loading="lazy">
+                </div>
+            </div>
+        </div>
+
         <div class="activity-card">
             <div class="activity-date">19 - 21 มีนาคม 2569</div>
             <div class="activity-details">
                 <h3>PSRU Cyber Hackathon #3</h3>
                 <p>โครงการอบรมเชิงปฏิบัติการและแข่งขันทักษะด้านความปลอดภัยทางไซเบอร์ ณ หอประชุมศรีวชิรโชติ มหาวิทยาลัยราชภัฏพิบูลสงคราม ร่วมกับ สกมช. (NCSA), กฟผ. และบริษัทเทคโนโลยีชั้นนำกว่า 16 แห่ง</p>
                 <div class="activity-gallery">
-                    <img src="images/S__59834370.jpg" alt="PSRU Cyber Hackathon 3 - 1" class="activity-thumb">
-                    <img src="images/S__59834371.jpg" alt="PSRU Cyber Hackathon 3 - 2" class="activity-thumb">
-                    <img src="images/S__59834372.jpg" alt="PSRU Cyber Hackathon 3 - 3" class="activity-thumb">
-                    <img src="images/S__59834373.jpg" alt="PSRU Cyber Hackathon 3 - 4" class="activity-thumb">
+                    <img src="images/1234.jpg" alt="PSRU Cyber Hackathon 3 - 1" class="activity-thumb" loading="lazy">
+                    <img src="images/12345.jpg" alt="PSRU Cyber Hackathon 3 - 2" class="activity-thumb" loading="lazy">
+                    <img src="images/123456.jpg" alt="PSRU Cyber Hackathon 3 - 3" class="activity-thumb" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1044,8 +1174,8 @@
                 <h3>AI Agent Coding Camp</h3>
                 <p>โครงการยกระดับทักษะแห่งอนาคต โดย อาจารย์ ดร.ณัฐ วีระวรรณ (ผู้ก่อตั้ง Chiang Mai Maker Club) ณ คณะเทคโนโลยีอุตสาหกรรม มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
                 <div class="activity-gallery">
-                    <img src="images/ai_camp_1.jpg" alt="AI Agent Coding Camp 1" class="activity-thumb">
-                    <img src="images/ai_camp_2.jpg" alt="AI Agent Coding Camp 2" class="activity-thumb">
+                    <img src="images/ai_camp_1.jpg" alt="AI Agent Coding Camp 1" class="activity-thumb" loading="lazy">
+                    <img src="images/ai_camp_2.jpg" alt="AI Agent Coding Camp 2" class="activity-thumb" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1056,7 +1186,7 @@
                 <h3>CyberNet Pro</h3>
                 <p>โครงการเพื่อมุ่งเน้นพัฒนาศักยภาพ อัปสกิลความรู้ด้านระบบเครือข่าย (Network) และความปลอดภัยทางไซเบอร์ (Cybersecurity) ณ ห้องปฏิบัติการคอมพิวเตอร์ คณะเทคโนโลยีอุตสาหกรรม</p>
                 <div class="activity-gallery">
-                    <img src="images/cybernet.jpg" alt="CyberNet Pro" class="activity-thumb">
+                    <img src="images/cybernet.jpg" alt="CyberNet Pro" class="activity-thumb" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1067,7 +1197,7 @@
                 <h3>อบรมเปิดประตูสู่โลกแห่ง IoT และระบบอัตโนมัติ</h3>
                 <p>พัฒนาทักษะด้านฮาร์ดแวร์และการเชื่อมต่อระบบอัตโนมัติ ณ สถาบันเทคโนโลยีดิจิทัล มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
                 <div class="activity-gallery">
-                    <img src="images/iot.jpg" alt="IoT and Automation Training" class="activity-thumb">
+                    <img src="images/iot.jpg" alt="IoT and Automation Training" class="activity-thumb" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1078,7 +1208,7 @@
                 <h3>อบรมพัฒนาทักษะการใช้ AI กับงานวิจัย</h3>
                 <p>การใช้ปัญญาประดิษฐ์ (AI) กับการวิจัยและโครงงานด้านวิศวกรรมคอมพิวเตอร์ ณ โครงการจัดตั้งสถาบันเทคโนโลยีดิจิทัล</p>
                 <div class="activity-gallery">
-                    <img src="images/ai_research.jpg" alt="AI with Research Training" class="activity-thumb">
+                    <img src="images/ai_research.jpg" alt="AI with Research Training" class="activity-thumb" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1087,7 +1217,10 @@
             <div class="activity-date">6 - 7 สิงหาคม 2567</div>
             <div class="activity-details">
                 <h3>พัฒนาทักษะผู้ประกอบการยุคดิจิทัล</h3>
-                <p>โครงการอบรม “พัฒนาแนวคิดและทักษะความเป็นผู้ประกอบการในยุคดิจิทัล” ณ Idea Lab อาคารหอสมุดอิเล็กทรอนิกส์ (e-Library PSRU)</p>
+                <p>โครงการอบรม “พัฒนาแนวคิดและทักษะความเป็นผู้ประกอบการในยุคดิจิทัล” ณ Idea Lab อาคารหอสมุดอิเล็กสรอนิกส์ (e-Library PSRU)</p>
+                <div class="activity-gallery">
+                    <img src="images/7.07.2567.jpg" alt="พัฒนาทักษะผู้ประกอบการยุคดิจิทัล" class="activity-thumb" loading="lazy">
+                </div>
             </div>
         </div>
 
@@ -1097,7 +1230,7 @@
                 <h3>ออกแบบและติดตั้งระบบ WI-FI</h3>
                 <p>โครงการอบรมภาคปฏิบัติการออกแบบและติดตั้งระบบเครือข่ายไร้สาย Wi-Fi ณ ห้องปฏิบัติการคอมพิวเตอร์ IDT มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
                 <div class="activity-gallery">
-                    <img src="images/wifi.jpg" alt="WI-FI Design and Installation Training" class="activity-thumb">
+                    <img src="images/wifi.jpg" alt="WI-FI Design and Installation Training" class="activity-thumb" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1108,96 +1241,97 @@
                 <h3>เตรียมความพร้อมช่างซ่อมไมโครคอมพิวเตอร์</h3>
                 <p>โครงการเตรียมความพร้อมการทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ สาขาช่างซ่อมไมโครคอมพิวเตอร์ ระดับ 1</p>
                 <div class="activity-gallery">
-                    <img src="images/repair.jpg" alt="Microcomputer Repair Training" class="activity-thumb">
+                    <img src="images/repair.jpg" alt="Microcomputer Repair Training" class="activity-thumb" loading="lazy">
                 </div>
             </div>
         </div>
 
     </section>
 
-    <!-- ===== CERTIFICATES ===== -->
+        <!-- ===== CERTIFICATES ===== -->
     <section class="reveal">
         <div class="section-label">// credentials</div>
-        <h2 class="section-title">เกียรติบัตร <span>ที่ได้รับ</span></h2>
+        <h2 class="section-title">CERTIFICATES & <span>CREDENTIALS</span></h2>
         <div class="certs-grid">
-            
-            <!-- Clickable Certificate with image preview option -->
-            <div class="cert-card" style="cursor: pointer;" onclick="openLightbox('images/cert_hackathon.jpg', 'เกียรติบัตรการอบรมและแข่งขันทักษะไซเบอร์ PSRU Cyber Hackathon')">
-                <div class="cert-title">PSRU Cyber Hackathon #3</div>
-                <div class="cert-bottom">
-                    <span style="color: var(--primary);">→ คลิกเพื่อดูรูป</span>
-                    <span>มี.ค. 2569</span>
+
+            <div class="cert-card" onclick="openLightbox('images/cert_hackathon3.png', 'PSRU Cyber Hackathon #3')">
+                <div class="cert-img-wrapper">
+                    <img class="cert-img" src="images/cert_hackathon3.png" alt="PSRU Cyber Hackathon #3" loading="lazy">
+                </div>
+                <div class="cert-info">
+                    <div class="cert-title">PSRU Cyber Hackathon #3</div>
+                    <div class="cert-meta">
+                        <span class="cert-meta-issuer">PSRU × NCSA × กฟผ.</span>
+                        <span>มี.ค. 2569</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="cert-card">
-                <div class="cert-title">Getting Started in Cybersecurity 3.0</div>
-                <div class="cert-bottom">
-                    <span>ความมั่นคงปลอดภัยไซเบอร์เบื้องต้น</span>
-                    <span>มิ.ย. 2569</span>
+            <div class="cert-card" onclick="openLightbox('images/cert_cyber30.png', 'Getting Started in Cybersecurity 3.0')">
+                <div class="cert-img-wrapper">
+                    <img class="cert-img" src="images/cert_cyber30.png" alt="Getting Started in Cybersecurity 3.0" loading="lazy">
+                </div>
+                <div class="cert-info">
+                    <div class="cert-title">Getting Started in Cybersecurity 3.0</div>
+                    <div class="cert-meta">
+                        <span class="cert-meta-issuer">ความมั่นคงปลอดภัยไซเบอร์</span>
+                        <span>มิ.ย. 2569</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="cert-card">
-                <div class="cert-title">Python Essentials 1</div>
-                <div class="cert-bottom">
-                    <span>Cisco Networking Academy</span>
-                    <span>ธ.ค. 2568</span>
+            <div class="cert-card" onclick="openLightbox('images/cert_python.png', 'Python Essentials 1 — Cisco Networking Academy')">
+                <div class="cert-img-wrapper">
+                    <img class="cert-img" src="images/cert_python.png" alt="Python Essentials 1" loading="lazy">
+                </div>
+                <div class="cert-info">
+                    <div class="cert-title">Python Essentials 1</div>
+                    <div class="cert-meta">
+                        <span class="cert-meta-issuer">Cisco Networking Academy</span>
+                        <span>ธ.ค. 2568</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="cert-card">
-                <div class="cert-title">Data Visualization & Dashboard Design</div>
-                <div class="cert-bottom">
-                    <span>การออกแบบแดชบอร์ด</span>
-                    <span>มี.ค. 2569</span>
+            <div class="cert-card" onclick="openLightbox('images/cert_cyberlab.png', 'Basic Cybersecurity Lab Course')">
+                <div class="cert-img-wrapper">
+                    <img class="cert-img" src="images/cert_cyberlab.png" alt="Basic Cybersecurity Lab Course" loading="lazy">
+                </div>
+                <div class="cert-info">
+                    <div class="cert-title">Basic Cybersecurity Lab Course</div>
+                    <div class="cert-meta">
+                        <span class="cert-meta-issuer">ทักษะปฏิบัติการไซเบอร์</span>
+                        <span>ก.พ. 2569</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="cert-card">
-                <div class="cert-title">Basic Cybersecurity Lab Course</div>
-                <div class="cert-bottom">
-                    <span>ทักษะปฏิบัติการปลอดภัยไซเบอร์</span>
-                    <span>ก.พ. 2569</span>
+            <div class="cert-card" onclick="openLightbox('images/cert_digital.jpg', 'โครงการพัฒนาสมรรถนะและทักษะดิจิทัล')">
+                <div class="cert-img-wrapper">
+                    <img class="cert-img" src="images/cert_digital.jpg" alt="โครงการพัฒนาสมรรถนะและทักษะดิจิทัล" loading="lazy">
+                </div>
+                <div class="cert-info">
+                    <div class="cert-title">โครงการพัฒนาสมรรถนะและทักษะดิจิทัล</div>
+                    <div class="cert-meta">
+                        <span class="cert-meta-issuer">PSRU Digital Test</span>
+                        <span>ก.พ. 2569</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="cert-card">
-                <div class="cert-title">โครงการพัฒนาสมรรถนะและทักษะดิจิทัล</div>
-                <div class="cert-bottom">
-                    <span>การวัดความพร้อมสู่ยุคดิจิทัล</span>
-                    <span>ก.พ. 2569</span>
+            <div class="cert-card" onclick="openLightbox('images/cert_dataviz.png', 'Data Visualization &amp; Dashboard Design')">
+                <div class="cert-img-wrapper">
+                    <img class="cert-img" src="images/cert_dataviz.png" alt="Data Visualization and Dashboard Design" loading="lazy">
+                </div>
+                <div class="cert-info">
+                    <div class="cert-title">Data Visualization &amp; Dashboard Design</div>
+                    <div class="cert-meta">
+                        <span class="cert-meta-issuer">การออกแบบแดชบอร์ด</span>
+                        <span>มี.ค. 2569</span>
+                    </div>
                 </div>
             </div>
 
-        </div>
-    </section>
-
-    <!-- ===== PHILOSOPHY ===== -->
-    <section class="reveal">
-        <div class="section-label">// principles</div>
-        <h2 class="section-title">แนวคิดและ <span>ปรัชญา</span></h2>
-        <div class="philosophy-grid">
-            <div class="philosophy-card">
-                <div class="phi-num">01</div>
-                <h3>🌙 ความมืดคือจุดเริ่มต้น</h3>
-                <p>แรงบันดาลใจมักเกิดขึ้นในความเงียบ — เมื่อเสียงรบกวนหายไป ความคิดสร้างสรรค์จะไหลอย่างอิสระ</p>
-            </div>
-            <div class="philosophy-card">
-                <div class="phi-num">02</div>
-                <h3>✨ Nothing is Deleted</h3>
-                <p>ทุกบรรทัดโค้ดที่เขียน ทุก Error ที่เจอ ล้วนเป็นส่วนหนึ่งของเรา ไม่มีอะไรสูญเปล่า</p>
-            </div>
-            <div class="philosophy-card">
-                <div class="phi-num">03</div>
-                <h3>🎨 Make Today Your Masterpiece</h3>
-                <p>ไม่ต้องรอวันพรุ่งนี้ — ทำวันนี้ให้เป็นผลงานชิ้นเอก ทุกวันคือโอกาสในการสร้างสรรค์</p>
-            </div>
-            <div class="philosophy-card">
-                <div class="phi-num">04</div>
-                <h3>🤝 Humans & AI Collaboration</h3>
-                <p>AI คือเครื่องมือที่ส่งเสริมขีดความสามารถ ปลดปล่อยจินตนาการเพื่อเปลี่ยนโค้ดที่ซับซ้อนให้กลายเป็นความจริง</p>
-            </div>
         </div>
     </section>
 
@@ -1431,6 +1565,15 @@
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.style.display = 'none';
+            }
+        });
+
+        // ===== LAZY IMAGE FADE-IN =====
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            if (img.complete) {
+                img.classList.add('loaded');
+            } else {
+                img.addEventListener('load', () => img.classList.add('loaded'));
             }
         });
     </script>

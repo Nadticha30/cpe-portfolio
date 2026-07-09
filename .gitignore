@@ -1,6 +1,0 @@
-# Ignore large PDF files and temporary text files
-*.pdf
-pdf_output.txt
-.system_generated/
-.tempmediaStorage/
-browser/
